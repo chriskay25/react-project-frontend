@@ -29,15 +29,14 @@ class Board extends Component {
     return (
       <div className="board">
         <table>
-          {console.log(this)}
-          {this.renderRow("A")}
-          {this.renderRow("B")}
-          {this.renderRow("C")}
-          {this.renderRow("D")}
-          {this.renderRow("E")}
-          {this.renderRow("F")}
-          {this.renderRow("G")}
-          {this.renderRow("H")}
+          {this.renderRow(1)}
+          {this.renderRow(2)}
+          {this.renderRow(3)}
+          {this.renderRow(4)}
+          {this.renderRow(5)}
+          {this.renderRow(6)}
+          {this.renderRow(7)}
+          {this.renderRow(8)}
         </table>
       </div>
     )
