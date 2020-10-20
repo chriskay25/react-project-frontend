@@ -22,6 +22,28 @@ class UsersContainer extends Component {
 
   handleLoginFormSubmit = event => {
     event.preventDefault()
+    const userInfo = this.state.loginForm
+    const headers = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user: userInfo
+      })
+    }
+    fetch("http://localhost:3000/api/v1/login", headers)
+      .then(resp => resp.json())
+      .then(userJSON => {
+        if (userJSON.error) {
+          alert("Invalid Credentials")
+        } else {
+          this.setState({
+            currentUser: userJSON
+          })
+        }
+      })
+      .catch(console.log)
   }
 
   handleLoginFormChange = event => {
@@ -44,7 +66,7 @@ class UsersContainer extends Component {
     return (
       <div>
         <User />
-        <UserLoginForm handleLoginFormChange={this.handleLoginFormChange} />
+        <UserLoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
         <Route exact path="/users/new" component={UserForm} />
         <Route exact path="/users/:id" component={User} />
       </div>
