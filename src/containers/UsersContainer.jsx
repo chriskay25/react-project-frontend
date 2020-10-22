@@ -63,10 +63,14 @@ class UsersContainer extends Component {
     return (
       <div>
         <h2>{ currentUser ? `Current User: ${currentUser.username}` : "Please Login to Play"}</h2>
-        <User />
-        <UserLoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
-        <Route exact path="/users/new" component={UserForm} />
-        <Route exact path="/users/:id" component={User} />
+        <Switch>
+          <Route exact path="/users/new">
+            <UserForm />
+          </Route>
+          <Route exact path="/login">
+            <UserLoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
+          </Route>
+        </Switch>
       </div>
     )
   }
