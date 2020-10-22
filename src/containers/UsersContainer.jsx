@@ -35,15 +35,15 @@ class UsersContainer extends Component {
     fetch("http://localhost:3000/api/v1/login", headers)
       .then(resp => resp.json())
       .then(userJSON => {
-        if (userJSON.error) {
+        if (userJSON.error) {  // in case there are server errors
           alert("Invalid Credentials")
         } else {
           this.setState({
-            currentUser: userJSON
+            currentUser: userJSON,
           })
         }
       })
-      .catch(console.log)
+      .catch(console.log)   // in case there are JS errors
   }
 
   handleLoginFormChange = event => {
@@ -57,14 +57,12 @@ class UsersContainer extends Component {
     })
   }
 
-  // findUser = () => {
-  //   let user = this.props.users.filter(user => user.id == this.props.match.params.id)[0]
-  // }
 
   render() {
-    // console.log("UC: ", this.props.users)
+    const { currentUser } = this.state
     return (
       <div>
+        <h2>{ currentUser ? `Current User: ${currentUser.username}` : "Please Login to Play"}</h2>
         <User />
         <UserLoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
         <Route exact path="/users/new" component={UserForm} />
