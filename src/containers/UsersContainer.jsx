@@ -6,6 +6,7 @@ import User from '../components/User';
 import UserForm from '../components/UserForm';
 import UserLoginForm from '../components/UserLoginForm';
 // import { fetchUsers } from '../actions/fetchUsers';
+import UserLogout from '../components/UserLogout';
 
 class UsersContainer extends Component {
 
@@ -17,6 +18,28 @@ class UsersContainer extends Component {
         username: "",
         password: ""
       }
+    }
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      fetch('http://localhost:3000/api/v1/get_current_user', {
+        headers: {
+          'Authorization': token,
+        }
+      })
+        .then(resp => resp.json())
+        .then(user => {
+          console.log("Component Did Mount: ", user)
+          if (user.error) {
+            alert(user.error)
+          } else {
+            this.setState({
+              currentUser: user
+            }) 
+          }
+        })
     }
   }
 
@@ -35,11 +58,13 @@ class UsersContainer extends Component {
     fetch("http://localhost:3000/api/v1/login", headers)
       .then(resp => resp.json())
       .then(userJSON => {
+        console.log("User JSON returned from login: ", userJSON)
         if (userJSON.error) {  // in case there are server errors
           alert("Invalid Credentials")
         } else {
+          localStorage.setItem('token', userJSON.jwt)
           this.setState({
-            currentUser: userJSON,
+            currentUser: userJSON.user,
           })
         }
       })
@@ -47,7 +72,6 @@ class UsersContainer extends Component {
   }
 
   handleLoginFormChange = event => {
-    console.log(event.target)
     const { name, value } = event.target
     this.setState({
       loginForm: {
@@ -57,13 +81,31 @@ class UsersContainer extends Component {
     })
   }
 
+  handleLogout = event => {
+    event.preventDefault()
+    localStorage.removeItem('token')
+    this.setState({
+      currentUser: null
+    })
+  }
+
 
   render() {
     const { currentUser } = this.state
-    return (
-      <div>
-        <h2>{ currentUser ? `Current User: ${currentUser.username}` : "Please Login to Play"}</h2>
-        <Switch>
+    if (currentUser) {
+      return (
+        <>
+          <User currentUser={currentUser}/>
+          <Route exact path="/logout">
+            <UserLogout handleLogout={this.handleLogout} />
+          </Route>
+        </>
+      )
+    } else {
+      return (
+        <div>
+          <h2>Please sign up or log in to Play</h2>
+          <Switch>
           <Route exact path="/users/new">
             <UserForm />
           </Route>
@@ -71,15 +113,10 @@ class UsersContainer extends Component {
             <UserLoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
           </Route>
         </Switch>
-      </div>
-    )
+        </div>
+      )
+    }
   }
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     users: state.users
-//   }
-// }
 
 export default UsersContainer
