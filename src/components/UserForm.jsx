@@ -10,14 +10,12 @@ class UserForm extends Component {
   }
 
   handleChange = (event) => {
-    console.log(this.props.addUser)
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
   handleSubmit = (event) => {
-    // console.log(this.props)
     event.preventDefault()
     const { username, password } = this.state
     this.props.addUser({ username, password })
@@ -30,19 +28,18 @@ class UserForm extends Component {
   render() {
     const { username, password } = this.state
     return (
-      <div>
-        {username} {password}
+      <>
         <h4>Create New User</h4>
-        <form onSubmit={this.handleSubmit}>
+        <form className="UserForm" onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username: </label>
-          <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleChange} />
+          <input type="text" placeholder="Username" name="username" value={username} onChange={this.handleChange} />
           <br />
           <label htmlFor="password">Password: </label>
-          <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} />
+          <input type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange} />
           <br />
           <input type="submit" />
         </form>
-      </div>
+      </>
     )
   }
 }
