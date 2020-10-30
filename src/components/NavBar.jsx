@@ -5,8 +5,9 @@ const NavBar = (props) => {
 
   return (
     <div>
-      <Link to='/users' style={{paddingRight: '10px'}}>Users</Link>
-      <Link to='/users/new'> New User</Link>
+      <Link to='/users/new' style={{paddingRight: '10px'}}> Sign Up</Link>
+      <Link to='/login' style={{paddingRight: '10px'}}>Login</Link>
+      <Link to='/logout'>Logout</Link>
     </div>
   )
 }
