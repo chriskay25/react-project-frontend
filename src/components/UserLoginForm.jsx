@@ -3,9 +3,9 @@ import React from 'react';
 
 const UserLoginForm = ({handleLoginFormChange, handleLoginFormSubmit, username, password}) => {
   return (
-    <div>
+    <>
       <h4>User Login</h4>
-      <form onSubmit={handleLoginFormSubmit}>
+      <form className="UserLoginForm" onSubmit={handleLoginFormSubmit}>
         <label htmlFor="username">Username: </label>
         <input type="text" placeholder="Username" name="username" value={username} onChange={handleLoginFormChange} />
         <br />
@@ -14,7 +14,7 @@ const UserLoginForm = ({handleLoginFormChange, handleLoginFormSubmit, username, 
         <br />
         <input type="submit" />
       </form>
-    </div>
+    </>
   )
   }
 
