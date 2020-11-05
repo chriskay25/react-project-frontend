@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Board from '../components/Board'
 
 
 class GameContainer extends Component {
@@ -14,8 +15,8 @@ class GameContainer extends Component {
       speed: 5,
       positions: {
         player: {
-          x: 0,
-          y: 0
+          x: (boardSize / 2) - (playerSize / 2),
+          y: (boardSize / 2) - (playerSize / 2)
         },
         enemies: []
       }
@@ -23,9 +24,10 @@ class GameContainer extends Component {
   }
 
   render() {
+    const { boardSize, playerSize } = this.state
     return (
       <div className="GameContainer">
-        Game
+        <Board boardSize={boardSize} playerSize={playerSize} />
       </div>
     )
   }
