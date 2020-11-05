@@ -145,6 +145,17 @@ class GameContainer extends Component {
     }))
   }
 
+  gameOver = () => {
+    console.log("Game Over")
+    this.setState({
+      score: 0,
+      positions: {
+        ...this.state.positions,
+        enemies: []
+      }
+    })
+  }
+
   render() {
     const { boardSize, playerSize, positions } = this.state
     return (
@@ -156,6 +167,7 @@ class GameContainer extends Component {
               enemy={enemy}
               playerPosition={positions.player}
               enemySize={playerSize}
+              gameOver={this.gameOver}
             />
           )}
         </Board>
