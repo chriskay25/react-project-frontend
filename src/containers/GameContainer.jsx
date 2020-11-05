@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Board from '../components/Board'
+import Board from '../components/Board';
+import Player from '../components/Player'
 
 
 class GameContainer extends Component {
@@ -36,10 +37,12 @@ class GameContainer extends Component {
   }
 
   render() {
-    const { boardSize, playerSize } = this.state
+    const { boardSize, playerSize, positions } = this.state
     return (
       <div className="GameContainer">
-        <Board boardSize={boardSize} playerSize={playerSize} />
+        <Board boardSize={boardSize} playerSize={playerSize}>
+          <Player playerPosition={positions.player} playerSize={playerSize} />
+        </Board>
       </div>
     )
   }
