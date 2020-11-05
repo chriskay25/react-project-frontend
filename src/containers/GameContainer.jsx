@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Board from '../components/Board';
 import Player from '../components/Player'
+import Enemy from '../components/Enemy'
 
 
 class GameContainer extends Component {
@@ -113,6 +114,13 @@ class GameContainer extends Component {
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize}>
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
+          {this.state.positions.enemies.map(enemy => 
+            <Enemy
+              enemy={enemy}
+              playerPosition={positions.player}
+              enemySize={playerSize}
+            />
+          )}
         </Board>
       </div>
     )
