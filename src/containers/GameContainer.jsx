@@ -24,6 +24,77 @@ class GameContainer extends Component {
     }
   }
 
+  handlePlayerMovement = (e) => {
+    const { x, y } = this.state.positions.player
+    const { boardSize, playerSize } = this.state
+
+    switch (e.key) {
+      case "ArrowUp":
+        if (y <= 0) {
+          return;
+        } else {
+          this.setState({
+            positions: {
+              ...this.state.positions,
+              player: {
+                x,
+                y: y - 10
+              }
+            }
+          })
+        }
+        break;
+      case "ArrowDown":
+        if (y > boardSize - playerSize) {
+          return;
+        } else {
+          this.setState({
+            positions: {
+              ...this.state.positions,
+              player: {
+                x,
+                y: y + 10
+              }
+            }
+          })
+        }
+        break;
+      case "ArrowLeft":
+        if (x < 0) {
+          return;
+        } else {
+          this.setState({
+            positions: {
+              ...this.state.positions,
+              player: {
+                x: x - 10,
+                y
+              }
+            }
+          })
+        }
+        break;
+      case "ArrowRight":
+        if (x > (boardSize - playerSize)) {
+          return;
+        } else {
+          this.setState({
+            positions: {
+              ...this.state.positions,
+              player: {
+                x: x + 10,
+                y
+              }
+            }
+          })
+        }
+        break;
+      default:
+        return;
+    }
+
+  }
+
   startGame = () => {
     console.log("Game Started")
     this.timeInterval = setInterval(this.updateGame, 1000)
@@ -41,7 +112,7 @@ class GameContainer extends Component {
     return (
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize}>
-          <Player playerPosition={positions.player} playerSize={playerSize} />
+          <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
         </Board>
       </div>
     )
