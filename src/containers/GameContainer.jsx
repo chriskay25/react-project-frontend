@@ -23,6 +23,18 @@ class GameContainer extends Component {
     }
   }
 
+  startGame = () => {
+    console.log("Game Started")
+    this.timeInterval = setInterval(this.updateGame, 1000)
+  }
+
+  updateGame = () => {
+    this.setState((state) => ({
+      timeElapsed: state.timeElapsed + 1,
+      score: state.score + 10
+    }))
+  }
+
   render() {
     const { boardSize, playerSize } = this.state
     return (
@@ -30,6 +42,10 @@ class GameContainer extends Component {
         <Board boardSize={boardSize} playerSize={playerSize} />
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.startGame()
   }
 
 }
