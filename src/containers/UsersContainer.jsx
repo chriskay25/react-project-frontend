@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import User from '../components/User';
 import UserForm from '../components/UserForm';
 import UserLoginForm from '../components/UserLoginForm';
-// import { fetchUsers } from '../actions/fetchUsers';
 import UserLogout from '../components/UserLogout';
+// import { fetchUsers } from '../actions/fetchUsers';
 
 class UsersContainer extends Component {
 
