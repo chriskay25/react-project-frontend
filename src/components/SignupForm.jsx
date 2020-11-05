@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addUser } from '../actions/addUser';
 
-class UserForm extends Component {
+class SignupForm extends Component {
 
   state = {
     username: '',
@@ -30,7 +30,7 @@ class UserForm extends Component {
     return (
       <>
         <h4>Create New User</h4>
-        <form className="UserForm" onSubmit={this.handleSubmit}>
+        <form className="SignupForm" onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username: </label>
           <input type="text" placeholder="Username" name="username" value={username} onChange={this.handleChange} />
           <br />
@@ -44,4 +44,4 @@ class UserForm extends Component {
   }
 }
 
-export default connect(null, { addUser })(UserForm)
+export default connect(null, { addUser })(SignupForm)
