@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserLogout = ({ handleLogout }) => {
+const Logout = ({ handleLogout }) => {
   return (
     <form className="UserLogout" onSubmit={handleLogout}>
       <input type="submit" value="Logout" />
@@ -8,4 +8,4 @@ const UserLogout = ({ handleLogout }) => {
   )
 }
 
-export default UserLogout
+export default Logout

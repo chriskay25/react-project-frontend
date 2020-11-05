@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const UserLoginForm = ({handleLoginFormChange, handleLoginFormSubmit, username, password}) => {
+const LoginForm = ({handleLoginFormChange, handleLoginFormSubmit, username, password}) => {
   return (
     <>
       <h4>User Login</h4>
-      <form className="UserLoginForm" onSubmit={handleLoginFormSubmit}>
+      <form className="LoginForm" onSubmit={handleLoginFormSubmit}>
         <label htmlFor="username">Username: </label>
         <input type="text" placeholder="Username" name="username" value={username} onChange={handleLoginFormChange} />
         <br />
@@ -18,4 +18,4 @@ const UserLoginForm = ({handleLoginFormChange, handleLoginFormSubmit, username, 
   )
   }
 
-export default UserLoginForm
+export default LoginForm

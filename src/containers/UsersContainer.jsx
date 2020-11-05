@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { Route, Switch } from 'react-router-dom';
 import User from '../components/User';
-import UserForm from '../components/UserForm';
-import UserLoginForm from '../components/UserLoginForm';
-import UserLogout from '../components/UserLogout';
+import SignupForm from '../components/SignupForm';
+import LoginForm from '../components/LoginForm';
+import Logout from '../components/Logout';
 // import { fetchUsers } from '../actions/fetchUsers';
 
 class UsersContainer extends Component {
@@ -97,7 +97,7 @@ class UsersContainer extends Component {
         <>
           <User currentUser={currentUser}/>
           <Route exact path="/logout">
-            <UserLogout handleLogout={this.handleLogout} />
+            <Logout handleLogout={this.handleLogout} />
           </Route>
         </>
       )
@@ -107,10 +107,10 @@ class UsersContainer extends Component {
           <h2>Please sign up or log in to Play</h2>
           <Switch>
           <Route exact path="/users/new">
-            <UserForm />
+            <SignupForm />
           </Route>
           <Route exact path="/login">
-            <UserLoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
+            <LoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
           </Route>
         </Switch>
         </div>
