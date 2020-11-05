@@ -6,6 +6,7 @@ import User from '../components/User';
 import SignupForm from '../components/SignupForm';
 import LoginForm from '../components/LoginForm';
 import Logout from '../components/Logout';
+import GameContainer from './GameContainer'
 // import { fetchUsers } from '../actions/fetchUsers';
 
 class UsersContainer extends Component {
@@ -92,10 +93,13 @@ class UsersContainer extends Component {
 
   render() {
     const { currentUser } = this.state
+    const boardSize = window.visualViewport.width / 1.5
+    const playerSize = boardSize / 25
     if (currentUser) {
       return (
         <>
           <User currentUser={currentUser}/>
+          <GameContainer boardSize={boardSize} playerSize={playerSize} />
           <Route exact path="/logout">
             <Logout handleLogout={this.handleLogout} />
           </Route>
