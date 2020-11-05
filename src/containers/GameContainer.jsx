@@ -96,8 +96,45 @@ class GameContainer extends Component {
 
   }
 
+  randomSide = (min, max) => {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  createNewEnemy = () => {
+    const { player } = this.state.positions
+    const { boardSize, playerSize } = this.state
+    let newEnemy;
+
+    switch(this.randomSide(1, 4)) {
+      case 1:  // Left
+        newEnemy = { key: this.state.onScreenEnemies, x: 0, y: player.y, direction: "Left" }
+        break;
+      case 2:  // Up
+        newEnemy = { key: this.state.onScreenEnemies, x: player.x, y: 0, direction: "Up" }
+        break;
+      case 3:  // Right
+        newEnemy = { key: this.state.onScreenEnemies, x: boardSize - playerSize, y: player.y, direction: "Right" }
+        break;
+      case 4:  // Down
+        newEnemy = { key: this.state.onScreenEnemies, x: player.x, y: boardSize - playerSize, direction: "Down" }
+        break;
+      default:
+        return;
+    }
+
+    this.setState({
+      positions: {
+        ...this.state.positions,
+        enemies: [...this.state.positions.enemies].concat(newEnemy)
+      }
+    })
+  }
+
   startGame = () => {
     console.log("Game Started")
+    this.createNewEnemy()
     this.timeInterval = setInterval(this.updateGame, 1000)
   }
 
