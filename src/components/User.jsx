@@ -1,15 +1,12 @@
 import React from 'react';
 
-const User = (props) => {
-  console.log("props: ", props)
-
-  let user = props.users.filter(user => user.id == props.match.params.id)[0]
-
-  console.log("user: ", user)
+const User = ({ currentUser }) => {
+  console.log("User Props: ", currentUser)
 
   return (
-    <div>
-      Username: {user.username}
+    <div className="User">
+      <h3>Current User: {currentUser.username}</h3>
+      <h4>Games Played: {currentUser.games.length}</h4>
     </div>
   )
 }
