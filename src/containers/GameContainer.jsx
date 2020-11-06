@@ -3,6 +3,7 @@ import Board from '../components/Board';
 import Player from '../components/Player';
 import Enemy from '../components/Enemy';
 import Instructions from '../components/Instructions'
+import GameStats from '../components/GameStats';
 
 
 class GameContainer extends Component {
@@ -16,6 +17,7 @@ class GameContainer extends Component {
       score: 0,
       timeElapsed: 0,
       speed: 5,
+      enemyID: 0,
       positions: {
         player: {
           x: (boardSize / 2) - (playerSize / 2),
@@ -108,18 +110,22 @@ class GameContainer extends Component {
     const { boardSize, playerSize } = this.state
     let newEnemy;
 
+    this.setState({
+      enemyID: this.state.enemyID + 1
+    })
+
     switch(this.randomSide(1, 4)) {
       case 1:  // Left
-        newEnemy = { key: this.state.onScreenEnemies, x: 0, y: player.y, direction: "Left" }
+        newEnemy = { key: this.state.enemyID, x: 0, y: player.y, direction: "Left" }
         break;
       case 2:  // Up
-        newEnemy = { key: this.state.onScreenEnemies, x: player.x, y: 0, direction: "Up" }
+        newEnemy = { key: this.state.enemyID, x: player.x, y: 0, direction: "Up" }
         break;
       case 3:  // Right
-        newEnemy = { key: this.state.onScreenEnemies, x: boardSize - playerSize, y: player.y, direction: "Right" }
+        newEnemy = { key: this.state.enemyID, x: boardSize - playerSize, y: player.y, direction: "Right" }
         break;
       case 4:  // Down
-        newEnemy = { key: this.state.onScreenEnemies, x: player.x, y: boardSize - playerSize, direction: "Down" }
+        newEnemy = { key: this.state.enemyID, x: player.x, y: boardSize - playerSize, direction: "Down" }
         break;
       default:
         return;
@@ -181,6 +187,11 @@ class GameContainer extends Component {
       timeElapsed: state.timeElapsed + 1,
       score: state.score + 10
     }))
+    if (this.state.timeElapsed % 5 === 0) {
+      this.setState({
+        speed: this.state.speed + 1
+      })
+    }
   }
 
   gameOver = () => {
@@ -195,7 +206,7 @@ class GameContainer extends Component {
   }
 
   render() {
-    const { boardSize, playerSize, positions } = this.state
+    const { score, timeElapsed, boardSize, playerSize, positions } = this.state
     return (
       <div className="GameContainer">
         <Instructions />
@@ -203,6 +214,7 @@ class GameContainer extends Component {
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
           {this.state.positions.enemies.map(enemy => 
             <Enemy
+              key={enemy.key}
               enemy={enemy}
               playerPosition={positions.player}
               enemySize={playerSize}
@@ -210,6 +222,7 @@ class GameContainer extends Component {
             />
           )}
         </Board>
+        <GameStats score={score} time={timeElapsed} />
       </div>
     )
   }
