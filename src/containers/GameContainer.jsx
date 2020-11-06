@@ -171,6 +171,7 @@ class GameContainer extends Component {
     console.log("Game Started")
     this.createNewEnemy()
     this.timeInterval = setInterval(this.updateGame, 1000)
+    this.enemyInterval = setInterval(this.updateEnemyPositions, 50)
   }
 
   updateGame = () => {
@@ -212,6 +213,11 @@ class GameContainer extends Component {
 
   componentDidMount() {
     this.startGame()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timeInterval)
+    clearInterval(this.enemyInterval)
   }
 
 }
