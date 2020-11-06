@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Board from '../components/Board';
-import Player from '../components/Player'
-import Enemy from '../components/Enemy'
+import Player from '../components/Player';
+import Enemy from '../components/Enemy';
+import Instructions from '../components/Instructions'
 
 
 class GameContainer extends Component {
@@ -172,6 +173,7 @@ class GameContainer extends Component {
     this.createNewEnemy()
     this.timeInterval = setInterval(this.updateGame, 1000)
     this.enemyInterval = setInterval(this.updateEnemyPositions, 50)
+    this.enemyCreationInterval = setInterval(this.createNewEnemy, 3000)
   }
 
   updateGame = () => {
@@ -196,6 +198,7 @@ class GameContainer extends Component {
     const { boardSize, playerSize, positions } = this.state
     return (
       <div className="GameContainer">
+        <Instructions />
         <Board boardSize={boardSize} playerSize={playerSize}>
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
           {this.state.positions.enemies.map(enemy => 

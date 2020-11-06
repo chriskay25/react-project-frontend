@@ -3,18 +3,19 @@ import React, { Component } from 'react';
 class Board extends Component {
 
   style = (props) => {
+    const { boardSize } = this.props
     return {
       position: 'relative',
-      width: `${this.props.boardSize}px`,
-      height: `${this.props.boardSize}px`,
+      width: `${boardSize}px`,
+      height: `${boardSize}px`,
       margin: '0 auto',
-      border: '5px black solid'
+      border: '10px white solid'
     }
   }
 
   render() {
     return (
-      <div className="CanvasComponent" style={this.style()}>
+      <div className="Board" style={this.style()}>
         {this.props.children}
       </div>
     )
