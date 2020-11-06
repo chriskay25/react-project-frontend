@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
-import { Route, Switch } from 'react-router-dom';
 import User from '../components/User';
-import SignupForm from '../components/SignupForm';
-import LoginForm from '../components/LoginForm';
-import Logout from '../components/Logout';
 import GameContainer from './GameContainer';
 import NavBar from '../components/NavBar';
 // import { fetchUsers } from '../actions/fetchUsers';
@@ -100,25 +96,15 @@ class UsersContainer extends Component {
     if (currentUser) {
       return (
         <>
+          <NavBar loggedIn={true} handleLogout={this.handleLogout} />
           <User currentUser={currentUser}/>
           <GameContainer boardSize={boardSize} playerSize={playerSize} />
-          <Route exact path="/logout">
-            <Logout handleLogout={this.handleLogout} />
-          </Route>
         </>
       )
     } else {
       return (
         <div>
-          <h2>Please sign up or log in to Play</h2>
-          <Switch>
-          <Route exact path="/users/new">
-            <SignupForm />
-          </Route>
-          <Route exact path="/login">
-            <LoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
-          </Route>
-        </Switch>
+          <NavBar loggedIn={false} handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
         </div>
       )
     }
