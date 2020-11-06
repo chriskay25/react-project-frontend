@@ -132,6 +132,41 @@ class GameContainer extends Component {
     })
   }
 
+  updateEnemyPositions = () => {
+    const { boardSize, playerSize, speed, positions: {enemies}, positions: {player} } = this.state
+    this.setState({
+      positions: {
+        ...this.state.positions,
+        enemies: enemies.filter(enemy => !enemy.remove).map(enemy => {
+          if (enemy.y < 0 || enemy.y > boardSize - playerSize || 
+            enemy.x < 0 || enemy.x > boardSize - playerSize) {
+              enemy.remove = true
+              return enemy;
+          }
+
+          switch(enemy.direction) {
+            case "Left":
+              enemy.x += speed;
+              break;
+            case "Up":
+              enemy.y += speed;
+              break;
+            case "Right":
+              enemy.x -= speed;
+              break;
+            case "Down":
+              enemy.y -= speed;
+              break;
+            default:
+              break;
+          }
+
+          return enemy;
+        })
+      }
+    })
+  }
+
   startGame = () => {
     console.log("Game Started")
     this.createNewEnemy()
