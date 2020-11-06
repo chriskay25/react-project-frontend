@@ -6,7 +6,8 @@ import User from '../components/User';
 import SignupForm from '../components/SignupForm';
 import LoginForm from '../components/LoginForm';
 import Logout from '../components/Logout';
-import GameContainer from './GameContainer'
+import GameContainer from './GameContainer';
+import NavBar from '../components/NavBar';
 // import { fetchUsers } from '../actions/fetchUsers';
 
 class UsersContainer extends Component {
@@ -93,7 +94,8 @@ class UsersContainer extends Component {
 
   render() {
     const { currentUser } = this.state
-    const boardSize = window.visualViewport.width / 1.5
+    const win = window.visualViewport.width / 1.5
+    const boardSize = win > 800 ? 800 : win
     const playerSize = boardSize / 25
     if (currentUser) {
       return (
