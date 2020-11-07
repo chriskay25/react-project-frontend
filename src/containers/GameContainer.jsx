@@ -17,6 +17,8 @@ class GameContainer extends Component {
       score: 0,
       timeElapsed: 0,
       speed: 5,
+      savedSpeed: null,
+      paused: false,
       enemyID: 0,
       positions: {
         player: {
@@ -196,10 +198,19 @@ class GameContainer extends Component {
 
   gameOver = () => {
     console.log("Game Over")
+    const { boardSize, playerSize } = this.props
+
     this.setState({
       score: 0,
+      timeElapsed: 0,
+      speed: 5,
+      enemyID: 0,
       positions: {
         ...this.state.positions,
+        player: {
+          x: (boardSize / 2) - (playerSize / 2),
+          y: (boardSize / 2) - (playerSize / 2)
+        },
         enemies: []
       }
     })
@@ -210,6 +221,7 @@ class GameContainer extends Component {
     return (
       <div className="GameContainer">
         <Instructions />
+        <button onClick={this.pauseGame}>Pause</button>
         <Board boardSize={boardSize} playerSize={playerSize}>
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
           {this.state.positions.enemies.map(enemy => 
@@ -225,6 +237,31 @@ class GameContainer extends Component {
         <GameStats score={score} time={timeElapsed} />
       </div>
     )
+  }
+
+  pauseGame = () => {
+    if (!this.state.paused) {
+      const { speed, timeElapsed } = this.state
+      clearInterval(this.timeInterval)
+      clearInterval(this.enemyCreationInterval)
+      this.setState({
+        paused: true,
+        speed: 0,
+        savedSpeed: speed,
+        timeElapsed: 0,
+        savedTime: timeElapsed
+      })
+      console.log(speed)
+    } else {
+      const { savedSpeed, savedTime } = this.state
+      this.timeInterval = setInterval(this.updateGame, 1000)
+      this.enemyCreationInterval = setInterval(this.createNewEnemy, 3000)
+      this.setState({
+        paused: false,
+        speed: savedSpeed,
+        timeElapsed: savedTime
+      })
+    }
   }
 
   componentDidMount() {
