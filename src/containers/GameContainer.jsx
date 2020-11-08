@@ -34,8 +34,8 @@ class GameContainer extends Component {
     const { x, y } = this.state.positions.player
     const { boardSize, playerSize } = this.state
 
-    switch (e.key) {
-      case "ArrowUp":
+    switch (e.keyCode) {
+      case 38:  // Up arrow
         if (y <= 0) {
           return;
         } else {
@@ -50,7 +50,7 @@ class GameContainer extends Component {
           })
         }
         break;
-      case "ArrowDown":
+      case 40:  // Down arrow
         if (y > boardSize - playerSize) {
           return;
         } else {
@@ -65,7 +65,7 @@ class GameContainer extends Component {
           })
         }
         break;
-      case "ArrowLeft":
+      case 37:  // Left arrow
         if (x < 0) {
           return;
         } else {
@@ -80,7 +80,7 @@ class GameContainer extends Component {
           })
         }
         break;
-      case "ArrowRight":
+      case 39:  // Right arrow
         if (x > (boardSize - playerSize)) {
           return;
         } else {
@@ -94,6 +94,9 @@ class GameContainer extends Component {
             }
           })
         }
+        break;
+      case 32:  // Space bar
+        this.pauseGame()
         break;
       default:
         return;
@@ -196,47 +199,10 @@ class GameContainer extends Component {
     }
   }
 
-  gameOver = () => {
-    console.log("Game Over")
-    const { boardSize, playerSize } = this.props
-
-    this.setState({
-      score: 0,
-      timeElapsed: 0,
-      speed: 5,
-      enemyID: 0,
-      positions: {
-        ...this.state.positions,
-        player: {
-          x: (boardSize / 2) - (playerSize / 2),
-          y: (boardSize / 2) - (playerSize / 2)
-        },
-        enemies: []
-      }
-    })
-  }
-
-  render() {
-    const { score, timeElapsed, boardSize, playerSize, positions } = this.state
-    return (
-      <div className="GameContainer">
-        <Instructions />
-        <button onClick={this.pauseGame}>Pause</button>
-        <Board boardSize={boardSize} playerSize={playerSize}>
-          <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
-          {this.state.positions.enemies.map(enemy => 
-            <Enemy
-              key={enemy.key}
-              enemy={enemy}
-              playerPosition={positions.player}
-              enemySize={playerSize}
-              gameOver={this.gameOver}
-            />
-          )}
-        </Board>
-        <GameStats score={score} time={timeElapsed} />
-      </div>
-    )
+  pauseWithSpace = (event) => {
+    if (event.key === 32) {
+      this.pauseGame()
+    }
   }
 
   pauseGame = () => {
@@ -263,6 +229,50 @@ class GameContainer extends Component {
       })
     }
   }
+
+  gameOver = () => {
+    console.log("Game Over")
+    const { boardSize, playerSize } = this.props
+
+    this.setState({
+      score: 0,
+      timeElapsed: 0,
+      speed: 5,
+      enemyID: 0,
+      positions: {
+        ...this.state.positions,
+        player: {
+          x: (boardSize / 2) - (playerSize / 2),
+          y: (boardSize / 2) - (playerSize / 2)
+        },
+        enemies: []
+      }
+    })
+  }
+
+  render() {
+    const { score, timeElapsed, boardSize, playerSize, positions } = this.state
+    return (
+      <div className="GameContainer">
+        <Instructions />
+        <Board boardSize={boardSize} playerSize={playerSize}>
+          <div className="UserInfo">{this.props.children}</div>
+          <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
+          {this.state.positions.enemies.map(enemy => 
+            <Enemy
+              key={enemy.key}
+              enemy={enemy}
+              playerPosition={positions.player}
+              enemySize={playerSize}
+              gameOver={this.gameOver}
+            />
+          )}
+        <GameStats score={score} time={timeElapsed} />
+        </Board>
+      </div>
+    )
+  }
+
 
   componentDidMount() {
     this.startGame()
