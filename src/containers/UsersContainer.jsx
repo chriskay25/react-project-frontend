@@ -69,7 +69,7 @@ class UsersContainer extends Component {
       .catch(console.log)   // in case there are JS errors
   }
 
-  handleLoginFormChange = event => {
+  handleFormChange = event => {
     const { name, value } = event.target
     this.setState({
       loginForm: {
@@ -97,14 +97,15 @@ class UsersContainer extends Component {
       return (
         <>
           <NavBar loggedIn={true} handleLogout={this.handleLogout} />
-          <User currentUser={currentUser}/>
-          <GameContainer boardSize={boardSize} playerSize={playerSize} />
+          <GameContainer boardSize={boardSize} playerSize={playerSize}>
+            <User currentUser={currentUser}/>
+          </GameContainer>
         </>
       )
     } else {
       return (
         <div>
-          <NavBar loggedIn={false} handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
+          <NavBar loggedIn={false} handleFormChange={this.handleFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
         </div>
       )
     }
