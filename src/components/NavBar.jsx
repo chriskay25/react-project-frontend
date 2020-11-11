@@ -4,27 +4,29 @@ import Logout from './Logout'
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
 
-const NavBar = ({ loggedIn, handleLoginFormChange, handleLoginFormSubmit, handleLogout }) => {
+const NavBar = ({ loggedIn, handleFormChange, handleLoginFormSubmit, handleLogout }) => {
 
   if (loggedIn) {
     return (
       <div className="NavBar">
+        <h1 style={{textAlign: 'center', fontSize: '2.5rem'}}>JUKE</h1>
         <Logout handleLogout={handleLogout} />
       </div>
     )
   } else {
     return (
       <div className="NavBar">
-        <h2>Please sign up or log in to Play</h2>
-        <Link to='/users/new' style={{paddingRight: '10px'}}> Sign Up</Link>
-        <Link to='/login' style={{paddingRight: '10px'}}>Login</Link>
+        <h1 style={{textAlign: 'center', fontSize: '3rem'}}>JUKE</h1>
+        <p style={{fontSize: '1.5rem', paddingLeft: '1em', marginBottom: '2rem'}}>Please sign up or log in to play</p>
+        <Link to='/users/new' style={{marginLeft: '2rem', padding: '.5rem 1rem'}}> Sign Up</Link>
+        <Link to='/login' style={{padding: '.5rem 1rem'}}>Log In</Link>
 
         <Switch>
           <Route exact path="/users/new">
-            <SignupForm />
+            <SignupForm handleFormChange={handleFormChange} />
           </Route>
           <Route exact path="/login">
-            <LoginForm handleLoginFormChange={handleLoginFormChange} handleLoginFormSubmit={handleLoginFormSubmit} />
+            <LoginForm handleFormChange={handleFormChange} handleLoginFormSubmit={handleLoginFormSubmit} />
           </Route>
         </Switch>
       </div>
