@@ -4,8 +4,10 @@ const Instructions = () => {
 
   const style = () => {
     return {
-      fontSize: '.5em',
-      textAlign: 'center'
+      // fontSize: '.5em',
+      textAlign: 'center',
+      color: 'white',
+      padding: '1rem'
     }
   }
 
