@@ -90,9 +90,9 @@ class UsersContainer extends Component {
 
   render() {
     const { currentUser } = this.state
-    const win = window.visualViewport.width / 1.5
-    const boardSize = win > 800 ? 800 : win
-    const playerSize = boardSize / 25
+    const win = window.visualViewport.width / 1.2
+    const boardSize = win > 900 ? 900 : win
+    const playerSize = boardSize / 30
     if (currentUser) {
       return (
         <>
