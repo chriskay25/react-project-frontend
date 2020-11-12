@@ -1,48 +1,125 @@
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+html {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 700px) {
+  html {
+    font-size: 8px;
   }
 }
 
-.App-header {
+@media screen and (min-width: 700px) {
+  .titleImage {
+    margin: 0 auto;
+  }
+}
+
+.App {
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  position: fixed;
+  /* background-image: url("./assets/cheap_diagonal_fabric.png"); */
   background-color: #282c34;
+}
+
+.GameContainer {
+  background-color: #282c34;
+  padding-top: 10px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  min-width: 100vw;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  color: #282c34;
+}
+
+.User {
+  color: black;
+  font-size: 1rem;
+  padding: 8px;
+}
+
+.FormBox {
+  background-color: rgb(50, 65, 87);
+  max-width: 700px;
+  margin: 3rem auto;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.NavBar {
+  margin: 0 auto;
+  max-width: 1000px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.InputForm {
+  padding-bottom: 2rem;
+  margin: 0rem 2rem;
+  max-width: '600px';
 }
 
-.title {
+.Board {
+  background-image: url("./assets/cheap_diagonal_fabric.png");
+}
+
+input {
+  background-color: rgb(216, 216, 216);
+  padding: .3rem;
+  margin: .5rem;
+}
+
+input[type=submit] {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  margin: 1rem 0 0 1rem;
+  background-color: transparent;
   text-align: center;
+  border-radius: 6px;
+  border: .2rem solid lightblue;
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
-  border-collapse: collapse;
+input[type=submit]:hover {
+  background-color: white;
+  color: rgb(50, 65, 87);
+  border: .2rem solid white;
 }
 
-td {
-  border: solid black;
-  padding: 0;
+input:focus {
+  border: .2rem solid black;
+  background-color: white;
 }
 
-.square {
-  padding: 1em;
-} 
+input:hover {
+  background-color: white;
+}
+
+label {
+  padding: 1rem;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  padding: .5rem;
+  margin: 1rem;
+}
+
+a:link, a:visited {
+  background-color: transparent;
+  border: .2rem solid lightblue;
+  border-radius: 6px;
+  color: white;
+}
+
+a:hover {
+  color: black;
+  background-color: lightblue;
+}
+
+
+
+
+
