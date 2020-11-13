@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
-import { Route, Switch } from 'react-router-dom';
 import User from '../components/User';
-import SignupForm from '../components/SignupForm';
-import LoginForm from '../components/LoginForm';
-import Logout from '../components/Logout';
+import GameContainer from './GameContainer';
+import NavBar from '../components/NavBar';
 // import { fetchUsers } from '../actions/fetchUsers';
 
 class UsersContainer extends Component {
@@ -71,7 +69,7 @@ class UsersContainer extends Component {
       .catch(console.log)   // in case there are JS errors
   }
 
-  handleLoginFormChange = event => {
+  handleFormChange = event => {
     const { name, value } = event.target
     this.setState({
       loginForm: {
@@ -92,27 +90,22 @@ class UsersContainer extends Component {
 
   render() {
     const { currentUser } = this.state
+    const win = window.visualViewport.width / 1.2
+    const boardSize = win > 850 ? 850 : win
+    const playerSize = boardSize / 30
     if (currentUser) {
       return (
         <>
-          <User currentUser={currentUser}/>
-          <Route exact path="/logout">
-            <Logout handleLogout={this.handleLogout} />
-          </Route>
+          <NavBar loggedIn={true} handleLogout={this.handleLogout} />
+          <GameContainer boardSize={boardSize} playerSize={playerSize}>
+            <User currentUser={currentUser}/>
+          </GameContainer>
         </>
       )
     } else {
       return (
         <div>
-          <h2>Please sign up or log in to Play</h2>
-          <Switch>
-          <Route exact path="/users/new">
-            <SignupForm />
-          </Route>
-          <Route exact path="/login">
-            <LoginForm handleLoginFormChange={this.handleLoginFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
-          </Route>
-        </Switch>
+          <NavBar loggedIn={false} handleFormChange={this.handleFormChange} handleLoginFormSubmit={this.handleLoginFormSubmit} />
         </div>
       )
     }

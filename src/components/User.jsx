@@ -5,9 +5,8 @@ const User = ({ currentUser }) => {
 
   return (
     <div className="User">
-      <h3>Current User: {currentUser.username}</h3>
-      <h4>Games Played: {currentUser.games.length}</h4>
-      <h4>High Score: {currentUser.highScore}</h4>
+      <small><strong>Username:</strong> {currentUser.username}</small>
+      <small style={{position: 'absolute', right: 8}}><strong>High Score:</strong> {currentUser.highScore}</small>
     </div>
   )
 }

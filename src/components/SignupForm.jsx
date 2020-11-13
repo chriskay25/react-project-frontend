@@ -28,9 +28,10 @@ class SignupForm extends Component {
   render() {
     const { username, password } = this.state
     return (
-      <>
-        <h4>Create New User</h4>
-        <form className="SignupForm" onSubmit={this.handleSubmit}>
+      <div className="FormBox" >
+        <h4 style={{padding: '1em'}}>NEW USER</h4>
+        <small style={{padding: '20px'}}>Enter a username and password to create an account.</small>
+        <form className="InputForm" onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username: </label>
           <input type="text" placeholder="Username" name="username" value={username} onChange={this.handleChange} />
           <br />
@@ -39,7 +40,7 @@ class SignupForm extends Component {
           <br />
           <input type="submit" />
         </form>
-      </>
+      </div>
     )
   }
 }
