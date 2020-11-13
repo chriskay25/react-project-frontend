@@ -3,15 +3,15 @@ import {Route, Link, Switch} from 'react-router-dom'
 import Logout from './Logout'
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
-import titleLogo from '../juke-title-5.png'
+import titleLogo from '../juke-title-25.png'
 
 const NavBar = ({ loggedIn, handleFormChange, handleLoginFormSubmit, handleLogout }) => {
 
   if (loggedIn) {
     return (
       <div className='NavBar'>
-        <div className='AppTitle' style={{display: 'flex', padding: '1rem'}}>
-          <img src={titleLogo} className='titleImage' style={{maxHeight: '4rem'}} />
+        <div className='AppTitle' style={{display: 'flex', paddingTop: '1rem'}}>
+          <img src={titleLogo} className='titleImage' style={{maxHeight: '7rem', margin: '0 auto'}} />
         </div>
         <Logout handleLogout={handleLogout} />
       </div>
@@ -19,10 +19,10 @@ const NavBar = ({ loggedIn, handleFormChange, handleLoginFormSubmit, handleLogou
   } else {
     return (
       <div className='NavBar'>
-        <div className="AppTitle" style={{display: 'flex', padding: '2rem'}}>
-          <img src={titleLogo} className='titleImage' style={{maxHeight: '4rem'}} />
+        <div className="AppTitle" style={{display: 'flex', paddingTop: '2rem', minHeight: '15rem'}}>
+          <img src={titleLogo} className='titleImage' style={{maxHeight: '14rem', justifyContent: 'center', alignItems: 'center'}} />
         </div>
-        <p style={{fontSize: '1.5rem', paddingLeft: '1em', marginBottom: '2rem', color: 'white'}}>Please sign up or log in to play</p>
+        <p style={{fontSize: '1.5rem', padding: '1rem 0 1rem 1rem', marginBottom: '1rem', color: 'white'}}>Please sign up or log in to play</p>
         <Link to='/users/new' style={{marginLeft: '2rem', padding: '.5rem 1rem'}}> Sign Up</Link>
         <Link to='/login' style={{padding: '.5rem 1rem'}}>Log In</Link>
 
