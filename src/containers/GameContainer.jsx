@@ -251,11 +251,11 @@ class GameContainer extends Component {
   }
 
   render() {
-    const { score, timeElapsed, boardSize, playerSize, positions } = this.state
+    const { paused, score, timeElapsed, boardSize, playerSize, positions } = this.state
     return (
       <div className="GameContainer">
         <Instructions />
-        <Board boardSize={boardSize} playerSize={playerSize}>
+        <Board boardSize={boardSize} playerSize={playerSize} paused={paused}>
           <div className="UserInfo">{this.props.children}</div>
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
           {this.state.positions.enemies.map(enemy => 
