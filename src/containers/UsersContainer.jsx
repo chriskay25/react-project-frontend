@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import User from '../components/User';
 import GameContainer from './GameContainer';
 import NavBar from '../components/NavBar';
+import Instructions from '../components/Instructions';
 // import { fetchUsers } from '../actions/fetchUsers';
 
 class UsersContainer extends Component {
@@ -97,6 +98,7 @@ class UsersContainer extends Component {
       return (
         <>
           <NavBar loggedIn={true} handleLogout={this.handleLogout} />
+          <Instructions />
           <GameContainer boardSize={boardSize} playerSize={playerSize}>
             <User currentUser={currentUser}/>
           </GameContainer>
