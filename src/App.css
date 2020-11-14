@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 16px;
 }
@@ -8,31 +12,23 @@ html {
   }
 }
 
-@media screen and (min-width: 700px) {
-  .titleImage {
-    margin: 0 auto;
+@media screen and (max-width: 700px) {
+  .auth-section {
+    min-width: 85vw;
   }
 }
 
 .App {
-  box-sizing: border-box;
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  position: fixed;
-  /* background-image: url("./assets/cheap_diagonal_fabric.png"); */
+  min-height: 100vh;
+  overflow: hidden;
   background-color: #282c34;
 }
 
 .GameContainer {
-  background-color: #282c34;
-  padding-top: 10px;
-  min-height: 100vh;
+  height: 85vh;
   min-width: 100vw;
-  align-items: center;
-  justify-content: center;
   color: #282c34;
+  overflow: hidden;
 }
 
 .User {
@@ -43,14 +39,49 @@ html {
 
 .FormBox {
   background-color: rgb(50, 65, 87);
-  max-width: 700px;
-  margin: 3rem auto;
+  max-width: 900px;
+  margin: 3rem;
   color: white;
 }
 
-.NavBar {
+.LoggedIn {
+  display: flex;
+  max-height: 12vh;
+}
+
+.loggedInLogo {
+  padding-top: 2vh;
+  display: flex;
+  width: 100%;
+}
+
+.LoggedOut {
+  display: block;
+  padding-top: 4vh;
+}
+
+.loggedOutLogo {
+  display: flex;
+  max-height: 20vh;
+}
+
+.logo {
+  object-fit: contain;  /* maintains proportions of image */
   margin: 0 auto;
-  max-width: 1000px;
+  padding-right: 3.5rem;
+}
+
+.auth-section {
+  max-width: 60vw;
+  margin: 0 auto;
+}
+
+.auth-section p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 3rem 0 2rem 1rem;
+  margin-bottom: 1rem;
+  color: white;
 }
 
 .InputForm {
@@ -59,8 +90,16 @@ html {
   max-width: '600px';
 }
 
-.Board {
-  background-image: url("./assets/cheap_diagonal_fabric.png");
+.PausedText {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 40%;
+  text-align: center;
+  font-size: 6rem;
+  opacity: 50%;
+  text-shadow: .3rem .3rem .5rem maroon;
 }
 
 input {
@@ -85,6 +124,7 @@ input[type=submit]:hover {
   background-color: white;
   color: rgb(50, 65, 87);
   border: .2rem solid white;
+  cursor: pointer;
 }
 
 input:focus {
@@ -103,8 +143,10 @@ label {
 
 a {
   text-decoration: none;
-  padding: .5rem;
+  padding: .5rem .8rem;
   margin: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 a:link, a:visited {
