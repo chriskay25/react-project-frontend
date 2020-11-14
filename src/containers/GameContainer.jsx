@@ -17,8 +17,8 @@ class GameContainer extends Component {
       score: 0,
       timeElapsed: 0,
       speed: 5,
-      savedSpeed: null,
       paused: false,
+      enemyInterval: 2500,
       enemyID: 0,
       positions: {
         player: {
@@ -181,22 +181,35 @@ class GameContainer extends Component {
 
   startGame = () => {
     console.log("Game Started")
+    const { enemyInterval } = this.state
     this.createNewEnemy()
-    this.timeInterval = setInterval(this.updateGame, 1000)
+    this.timeInterval = setInterval(this.updateTime, 1000)
+    this.scoreInterval = setInterval(this.updateScore, 100)
     this.enemyInterval = setInterval(this.updateEnemyPositions, 50)
-    this.enemyCreationInterval = setInterval(this.createNewEnemy, 3000)
+    this.enemyCreationInterval = setInterval(this.createNewEnemy, enemyInterval)
   }
 
-  updateGame = () => {
+  updateTime = () => {
     this.setState((state) => ({
       timeElapsed: state.timeElapsed + 1,
-      score: state.score + 10
     }))
-    if (this.state.timeElapsed % 5 === 0) {
+    if (this.state.timeElapsed % 10 === 0) {
       this.setState({
         speed: this.state.speed + 1
       })
+    } else if (this.state.timeElapsed % 5 === 0) {
+      clearInterval(this.enemyCreationInterval)
+      this.setState({
+        enemyInterval: this.state.enemyInterval - 100
+      })
+      this.enemyCreationInterval = setInterval(this.createNewEnemy, this.state.enemyInterval)
     }
+  }
+
+  updateScore = () => {
+    this.setState((state) => ({
+      score: state.score + 1
+    }))
   }
 
   pauseWithSpace = (event) => {
@@ -207,25 +220,31 @@ class GameContainer extends Component {
 
   pauseGame = () => {
     if (!this.state.paused) {
-      const { speed, timeElapsed } = this.state
+      const { score, speed, timeElapsed, enemyInterval } = this.state
       clearInterval(this.timeInterval)
+      clearInterval(this.scoreInterval)
       clearInterval(this.enemyCreationInterval)
       this.setState({
         paused: true,
         speed: 0,
         savedSpeed: speed,
         timeElapsed: 0,
-        savedTime: timeElapsed
+        savedTime: timeElapsed,
+        savedScore: score,
+        savedInterval: enemyInterval
       })
       console.log(speed)
     } else {
-      const { savedSpeed, savedTime } = this.state
-      this.timeInterval = setInterval(this.updateGame, 1000)
+      const { savedScore, savedSpeed, savedTime, savedInterval } = this.state
+      this.timeInterval = setInterval(this.updateTime, 1000)
+      this.scoreInterval = setInterval(this.updateScore, 50)
       this.enemyCreationInterval = setInterval(this.createNewEnemy, 3000)
       this.setState({
         paused: false,
         speed: savedSpeed,
-        timeElapsed: savedTime
+        timeElapsed: savedTime,
+        score: savedScore,
+        enemyInterval: savedInterval
       })
     }
   }
@@ -234,11 +253,14 @@ class GameContainer extends Component {
     console.log("Game Over")
     const { boardSize, playerSize } = this.props
 
+    clearInterval(this.enemyCreationInterval)
+
     this.setState({
       score: 0,
       timeElapsed: 0,
       speed: 5,
       enemyID: 0,
+      enemyInterval: 2500,
       positions: {
         ...this.state.positions,
         player: {
@@ -248,13 +270,13 @@ class GameContainer extends Component {
         enemies: []
       }
     })
+    this.enemyCreationInterval = setInterval(this.createNewEnemy, 2500)
   }
 
   render() {
-    const { paused, score, timeElapsed, boardSize, playerSize, positions } = this.state
+    const { paused, score, speed, timeElapsed, boardSize, playerSize, positions, enemyInterval } = this.state
     return (
       <div className="GameContainer">
-        <Instructions />
         <Board boardSize={boardSize} playerSize={playerSize} paused={paused}>
           <div className="UserInfo">{this.props.children}</div>
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
@@ -267,7 +289,7 @@ class GameContainer extends Component {
               gameOver={this.gameOver}
             />
           )}
-        <GameStats score={score} time={timeElapsed} />
+          <GameStats score={score} time={timeElapsed} speed={speed} enemyInterval={enemyInterval}  />
         </Board>
       </div>
     )
@@ -280,7 +302,9 @@ class GameContainer extends Component {
 
   componentWillUnmount() {
     clearInterval(this.timeInterval)
+    clearInterval(this.scoreInterval)
     clearInterval(this.enemyInterval)
+    clearInterval(this.enemyCreationInterval)
   }
 
 }
