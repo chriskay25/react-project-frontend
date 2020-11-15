@@ -14,9 +14,10 @@ class GameContainer extends Component {
     this.state = {
       boardSize: boardSize,
       playerSize: playerSize,
+      gameOver: true,
       score: 0,
       timeElapsed: 0,
-      speed: 5,
+      speed: 25,
       paused: false,
       enemyInterval: 2500,
       enemyID: 0,
@@ -181,6 +182,9 @@ class GameContainer extends Component {
 
   startGame = () => {
     console.log("Game Started")
+    this.setState({
+      gameOver: false
+    })
     const { enemyInterval } = this.state
     this.createNewEnemy()
     this.timeInterval = setInterval(this.updateTime, 1000)
@@ -251,7 +255,10 @@ class GameContainer extends Component {
   }
 
   gameOver = () => {
-    console.log("Game Over")    
+    console.log("Game Over")   
+    this.setState({
+      gameOver: true
+    }) 
     this.resetGame()
   }
 
@@ -283,10 +290,10 @@ class GameContainer extends Component {
   }
 
   render() {
-    const { paused, score, speed, timeElapsed, boardSize, playerSize, positions, enemyInterval } = this.state
+    const { paused, score, speed, timeElapsed, boardSize, playerSize, positions, enemyInterval, gameOver } = this.state
     return (
       <div className="GameContainer">
-        <Board boardSize={boardSize} playerSize={playerSize} paused={paused}>
+        <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver}>
           <div className="UserInfo">{this.props.children}</div>
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
           {this.state.positions.enemies.map(enemy => 
