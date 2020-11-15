@@ -190,12 +190,13 @@ class GameContainer extends Component {
   }
 
   updateTime = () => {
-    this.setState((state) => ({
+    this.setState((state) => ({ 
       timeElapsed: state.timeElapsed + 1,
     }))
     if (this.state.timeElapsed % 10 === 0) {
       this.setState({
-        speed: this.state.speed + 1
+        speed: this.state.speed + 1,
+        playerSize: this.state.playerSize + 2
       })
     } else if (this.state.timeElapsed % 5 === 0) {
       clearInterval(this.enemyCreationInterval)
@@ -250,19 +251,28 @@ class GameContainer extends Component {
   }
 
   gameOver = () => {
-    console.log("Game Over")
-    const { boardSize, playerSize } = this.props
+    console.log("Game Over")    
+    this.resetGame()
+  }
 
+  resetGame = () => {
+    clearInterval(this.timeInterval)
+    clearInterval(this.scoreInterval)
+    clearInterval(this.enemyInterval)
     clearInterval(this.enemyCreationInterval)
 
+    const { boardSize, playerSize } = this.props
+
     this.setState({
+      boardSize: boardSize,
+      playerSize: playerSize,
       score: 0,
       timeElapsed: 0,
       speed: 5,
-      enemyID: 0,
+      paused: false,
       enemyInterval: 2500,
+      enemyID: 0,
       positions: {
-        ...this.state.positions,
         player: {
           x: (boardSize / 2) - (playerSize / 2),
           y: (boardSize / 2) - (playerSize / 2)
@@ -270,7 +280,6 @@ class GameContainer extends Component {
         enemies: []
       }
     })
-    this.enemyCreationInterval = setInterval(this.createNewEnemy, 2500)
   }
 
   render() {
