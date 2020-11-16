@@ -19,13 +19,18 @@ html {
 }
 
 @keyframes game-over-animation {
-  0% {background-position: 0% 0%;}
-  100% {background-position: 100% 100%;}
+  0% {background-position: 0% 0%; border: lightblue solid 5px;}
+  100% {background-position: 100% 100%; border: black solid 5px;}
 }
 
 @keyframes game-over-text {
   0% {font-size: 2rem; color: maroon;}
   100% {font-size: 5rem; color: lightblue;}
+}
+
+@keyframes user-info {
+  0% {color: black; font-size: 1rem; padding: 0 1rem;}
+  100% {color: white; font-size: 1.15rem; padding: 0 .9rem}
 }
 
 .App {
@@ -49,9 +54,11 @@ html {
 }
 
 .User {
+  display: flex;
   color: black;
-  font-size: 1.5rem;
-  padding: .5rem;
+  font-size: 1rem;
+  justify-content: space-between;
+  padding: 0 1rem;
 }
 
 .GameStats {
@@ -138,6 +145,10 @@ html {
   color: transparent;
   animation: game-over-text 1.5s ease forwards;
   animation-delay: 1s;
+}
+
+.game-over-user-info {
+  animation: user-info 1.5s ease forwards;
 }
 
 input {
