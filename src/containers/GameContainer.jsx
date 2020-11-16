@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Board from '../components/Board';
 import Player from '../components/Player';
 import Enemy from '../components/Enemy';
-import Instructions from '../components/Instructions'
 import GameStats from '../components/GameStats';
+import User from '../components/User'
 
 
 class GameContainer extends Component {
@@ -255,7 +255,6 @@ class GameContainer extends Component {
   }
 
   gameOver = () => {
-    console.log("Game Over")   
     this.setState({
       gameOver: true
     }) 
@@ -294,7 +293,7 @@ class GameContainer extends Component {
     return (
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver}>
-          <div className="UserInfo">{this.props.children}</div>
+          <User gameOver={gameOver} currentUser={this.props.currentUser} />
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
           {this.state.positions.enemies.map(enemy => 
             <Enemy
