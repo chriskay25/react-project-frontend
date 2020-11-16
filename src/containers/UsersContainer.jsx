@@ -99,9 +99,7 @@ class UsersContainer extends Component {
         <>
           <NavBar loggedIn={true} handleLogout={this.handleLogout} />
           <Instructions />
-          <GameContainer boardSize={boardSize} playerSize={playerSize}>
-            <User currentUser={currentUser}/>
-          </GameContainer>
+          <GameContainer boardSize={boardSize} playerSize={playerSize} currentUser={currentUser} />
         </>
       )
     } else {
