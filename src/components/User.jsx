@@ -1,12 +1,10 @@
 import React from 'react';
 
-const User = ({ currentUser }) => {
-  console.log("User Props: ", currentUser)
-
+const User = ({ currentUser, gameOver }) => {
   return (
-    <div className="User">
-      <small><strong>Username:</strong> {currentUser.username}</small>
-      <small style={{position: 'absolute', right: 8}}><strong>High Score:</strong> {currentUser.highScore}</small>
+    <div className={gameOver ? 'User game-over-user-info' : 'User'}>
+      <p><strong>Player:</strong> {currentUser.username}</p>
+      <p><strong>High Score:</strong> {currentUser.highScore}</p>
     </div>
   )
 }
