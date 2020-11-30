@@ -1,9 +1,10 @@
-export default function reducer(state = {users: []}, action) {
+export default function reducer(state = {currentUser: null}, action) {
   switch (action.type) {
-    case 'FETCH_USERS':
-      return {users: action.payload}
     case 'ADD_USER':
-      return {...state, users: [...state.users, action.payload]}
+      return {
+        ...state,
+        currentUser: action.payload
+      }
     default:
       return state
   }
