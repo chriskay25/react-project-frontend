@@ -4,7 +4,7 @@ import Player from '../components/Player';
 import Enemy from '../components/Enemy';
 import GameStats from '../components/GameStats';
 import User from '../components/User'
-
+import { connect } from 'react-redux'
 
 class GameContainer extends Component {
 
@@ -17,7 +17,7 @@ class GameContainer extends Component {
       gameOver: true,
       score: 0,
       timeElapsed: 0,
-      speed: 25,
+      speed: 5,
       paused: false,
       enemyInterval: 2500,
       enemyID: 0,
@@ -102,7 +102,6 @@ class GameContainer extends Component {
       default:
         return;
     }
-
   }
 
   randomSide = (min, max) => {
@@ -310,7 +309,6 @@ class GameContainer extends Component {
     )
   }
 
-
   componentDidMount() {
     this.startGame()
   }
@@ -321,7 +319,10 @@ class GameContainer extends Component {
     clearInterval(this.enemyInterval)
     clearInterval(this.enemyCreationInterval)
   }
-
 }
 
-export default GameContainer
+const mapState = (state) => ({
+  currentUser: state.currentUser
+})
+
+export default connect(mapState, null)(GameContainer)
