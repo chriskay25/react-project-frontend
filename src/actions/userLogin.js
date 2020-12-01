@@ -10,13 +10,14 @@ export const userLogin = (data) => {
       })
     })
       .then(resp => resp.json())
-      .then(user => {
-        if (user.error) {
+      .then(userData => {
+        if (userData.error) {
           alert("Invalid Credentials")
         } else {
+          localStorage.setItem('token', userData.jwt)
           dispatch({
             type: 'USER_LOGIN',
-            payload: user
+            payload: userData.user
           })
         }
       })
