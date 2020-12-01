@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import playerCircle from '../Circle-1.png'
+import playerCircle from '../assets/Circle-1.png'
 
 
 class Player extends Component {

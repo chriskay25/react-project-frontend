@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import enemyCircle from '../Circle-2.png'
+import enemyCircle from '../assets/Circle-2.png'
 
 
 class Enemy extends Component {
