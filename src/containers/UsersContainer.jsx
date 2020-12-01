@@ -4,6 +4,7 @@ import GameContainer from './GameContainer';
 import NavBar from '../components/NavBar';
 import Instructions from '../components/Instructions';
 import { userLogout } from '../actions/userLogout'
+import { getCurrentUser } from '../actions/getCurrentUser'
 
 class UsersContainer extends Component {
 
@@ -33,14 +34,18 @@ class UsersContainer extends Component {
       )
     }
   }
+
+  componentDidMount() {
+    this.props.getCurrentUser()
+  }
 }
 
 const mapState = (state) => ({
   currentUser: state.currentUser
 })
 
-
 export default connect(
   mapState,
-  {userLogout}
+  {userLogout,
+  getCurrentUser}
 )(UsersContainer)
