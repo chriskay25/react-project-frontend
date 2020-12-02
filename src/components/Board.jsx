@@ -38,19 +38,19 @@ class Board extends Component {
 
   render() {
     const { paused, gameOver } = this.props
-      return (
-        <div className="Board" style={this.style()}>
-          {this.props.children}
-          <p className="PausedText">
-            {paused ? 'Paused' : null}
-          </p>
-          <p className="game-over-text">
-            {gameOver ? 'Game Over' : null}
-          </p>
-        </div>
-      ) 
-    }
+    return (
+      <div className="Board" style={this.style()}>
+        {this.props.children}
+        <p className="PausedText">
+          {paused ? 'Paused' : null}
+        </p>
+        <p className="game-over-text">
+          {gameOver ? 'Game Over' : null}
+        </p>
+      </div>
+    ) 
+  }
     
-  } 
+} 
 
 export default Board
