@@ -16,5 +16,9 @@ export const getCurrentUser = () => {
           }
         })
     }
+  } else {
+    return (dispatch) => {
+      dispatch({type: 'GET_CURRENT_USER', payload: null})
+    }
   }
 }
