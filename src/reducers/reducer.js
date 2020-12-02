@@ -1,4 +1,4 @@
-export default function reducer(state = {currentUser: null}, action) {
+export default function reducer(state = {currentUser: null, highScore: null}, action) {
   switch (action.type) {
     case 'GET_CURRENT_USER':
       return {
@@ -19,6 +19,11 @@ export default function reducer(state = {currentUser: null}, action) {
       return {
         ...state,
         currentUser: action.payload
+      }
+    case 'SAVE_GAME':
+      return {
+        ...state,
+        highScore: action.payload.user.highScore
       }
     default:
       return state
