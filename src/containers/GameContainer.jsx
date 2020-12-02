@@ -5,6 +5,7 @@ import Enemy from '../components/Enemy';
 import GameStats from '../components/GameStats';
 import User from '../components/User'
 import { connect } from 'react-redux'
+import { saveGame } from '../actions/saveGame'
 
 class GameContainer extends Component {
 
@@ -14,6 +15,7 @@ class GameContainer extends Component {
     this.state = {
       boardSize: boardSize,
       playerSize: playerSize,
+      enemySize: playerSize,
       gameOver: true,
       score: 0,
       timeElapsed: 0,
@@ -180,7 +182,6 @@ class GameContainer extends Component {
   }
 
   startGame = () => {
-    console.log("Game Started")
     this.setState({
       gameOver: false
     })
@@ -237,7 +238,6 @@ class GameContainer extends Component {
         savedScore: score,
         savedInterval: enemyInterval
       })
-      console.log(speed)
     } else {
       const { savedScore, savedSpeed, savedTime, savedInterval } = this.state
       this.timeInterval = setInterval(this.updateTime, 1000)
@@ -254,9 +254,11 @@ class GameContainer extends Component {
   }
 
   gameOver = () => {
+    const { score } = this.state
     this.setState({
       gameOver: true
     }) 
+    this.props.saveGame({score})
     this.resetGame()
   }
 
@@ -288,7 +290,7 @@ class GameContainer extends Component {
   }
 
   render() {
-    const { paused, score, speed, timeElapsed, boardSize, playerSize, positions, enemyInterval, gameOver } = this.state
+    const { paused, score, speed, timeElapsed, boardSize, playerSize, enemySize, positions, enemyInterval, gameOver } = this.state
     return (
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver}>
@@ -299,7 +301,7 @@ class GameContainer extends Component {
               key={enemy.key}
               enemy={enemy}
               playerPosition={positions.player}
-              enemySize={playerSize}
+              enemySize={enemySize}
               gameOver={this.gameOver}
             />
           )}
@@ -325,4 +327,7 @@ const mapState = (state) => ({
   currentUser: state.currentUser
 })
 
-export default connect(mapState, null)(GameContainer)
+export default connect(
+  mapState, 
+  { saveGame }
+)(GameContainer)
