@@ -1,9 +1,9 @@
 import React from 'react'
 
-const GameStats = ({ score, timeElapsed }) => {
+const GameStats = ({ score }) => {
   return (
-    <div className="GameStats" style={{position: 'absolute', right: 10, bottom: 10, color: 'black', fontSize: '2.5 rem'}}>
-      Score: {score}
+    <div className="GameStats">
+      <p>Score: {score}</p>
     </div>
   )
 }
