@@ -29,10 +29,10 @@ const NavBar = ({ loggedIn, handleFormChange, handleLoginFormSubmit, handleLogou
 
           <Switch>
             <Route exact path="/users/new">
-              <SignupForm handleFormChange={handleFormChange} />
+              <SignupForm />
             </Route>
             <Route exact path="/login">
-              <LoginForm handleFormChange={handleFormChange} handleLoginFormSubmit={handleLoginFormSubmit} />
+              <LoginForm />
             </Route>
           </Switch>
         </div>
