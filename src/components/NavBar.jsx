@@ -1,44 +1,42 @@
-import React from 'react'
-import {Route, Link, Switch} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom'
 import Logout from './Logout'
-import SignupForm from './SignupForm'
-import LoginForm from './LoginForm'
-import titleLogo from '../assets/juke-title-28.png'
+import Logo from './Logo'
+import { userLogout } from '../actions/userLogout'
 
-const NavBar = ({ loggedIn, handleFormChange, handleLoginFormSubmit, handleLogout }) => {
+class NavBar extends Component {
 
-  if (loggedIn) {
-    return (
-      <div className='NavBar LoggedIn'>
-        <div className="loggedInLogo">
-          <img src={titleLogo} className='logo' alt='logo' style={{margin: '0 auto'}} />
-        </div>
-        <Logout handleLogout={handleLogout} />
-      </div>
-    )
-  } else {
-    return (
-      <div className='NavBar LoggedOut'>
-        <div className="loggedOutLogo">
-          <img src={titleLogo} className='logo' alt='logo' />
-        </div>
-        <div className='auth-section'>
-          <p>PLEASE SIGN UP OR LOG IN TO PLAY</p>
-          <Link to='/users/new' style={{marginLeft: '2rem'}}> Sign Up</Link>
-          <Link to='/login'>Log In</Link>
+  handleLogout = event => {
+    event.preventDefault()
+    this.props.userLogout()
+  }
 
-          <Switch>
-            <Route exact path="/users/new">
-              <SignupForm />
-            </Route>
-            <Route exact path="/login">
-              <LoginForm />
-            </Route>
-          </Switch>
+  render() {
+    if (this.props.currentUser) {
+      return (
+        <div className='NavBar LoggedIn'>
+          <Logout handleLogout={this.handleLogout} />
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className='NavBar LoggedOut'>
+          <div className='auth-section'>
+            <Link to='/users/new' style={{marginLeft: '2rem'}}> Sign Up</Link>
+            <Link to='/login'>Log In</Link>
+          </div>
+        </div>
+      )
+    }
   }
 }
 
-export default NavBar
+const mapState = (state) => ({
+  currentUser: state.currentUser
+})
+
+export default connect(
+  mapState, 
+  {userLogout}
+)(NavBar)
