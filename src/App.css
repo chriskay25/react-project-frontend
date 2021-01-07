@@ -73,7 +73,7 @@ html {
 .FormBox {
   background-color: rgb(50, 65, 87);
   max-width: 900px;
-  margin: 3rem;
+  margin: 6rem auto;
   color: white;
 }
 
@@ -82,7 +82,7 @@ html {
   max-height: 12vh;
 }
 
-.loggedInLogo {
+.titleLogo {
   padding-top: 2vh;
   display: flex;
   width: 100%;
@@ -102,11 +102,6 @@ html {
   object-fit: contain;  /* maintains proportions of image */
   margin: 0 auto;
   padding-right: 3.5rem;
-}
-
-.auth-section {
-  max-width: 60vw;
-  margin: 0 auto;
 }
 
 .auth-section p {

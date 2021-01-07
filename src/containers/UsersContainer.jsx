@@ -8,11 +8,6 @@ import { getCurrentUser } from '../actions/getCurrentUser'
 
 class UsersContainer extends Component {
 
-  handleLogout = event => {
-    event.preventDefault()
-    this.props.userLogout()
-  }
-
   render() {
     const { currentUser } = this.props
     const win = window.visualViewport.width * .7
@@ -21,7 +16,6 @@ class UsersContainer extends Component {
     if (currentUser) {
       return (
         <>
-          <NavBar loggedIn={true} handleLogout={this.handleLogout} />
           <Instructions />
           <GameContainer boardSize={boardSize} playerSize={playerSize} currentUser={this.props.currentUser} />
         </>
@@ -29,7 +23,7 @@ class UsersContainer extends Component {
     } else {
       return (
         <div>
-          <NavBar loggedIn={false} />
+          {/* <NavBar loggedIn={false} /> */}
         </div>
       )
     }
