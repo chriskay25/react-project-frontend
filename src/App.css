@@ -6,15 +6,39 @@ html {
   font-size: 16px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 699px) {
   html {
     font-size: 8px;
   }
+  .auth-forms {
+    min-width: 100vw;
+  }
 }
 
-@media screen and (max-width: 700px) {
-  .auth-section {
-    min-width: 85vw;
+@media screen and (min-width: 700px) {
+  html {
+    font-size: 10px;
+  }
+  .auth-forms {
+    max-width: 85vw;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 16px;
   }
 }
 
@@ -37,6 +61,48 @@ html {
   min-height: 100vh;
   overflow: hidden;
   background-color: #282c34;
+}
+
+.logo {
+  display: flex;
+  width: 100%;
+}
+
+.logged-out-logo {
+  height: 20vh;
+  margin-top: 4vh;
+}
+
+.logged-in-logo {
+  height: 10vh;
+  margin-top: 2vh;
+}
+
+.logo img {
+  object-fit: contain;  /* maintains proportions of image */
+  margin: 0 auto;
+  padding-right: 3rem;
+}
+
+.auth-forms {
+  margin: 8rem auto;
+  max-width: 700px;
+}
+
+.form-links {
+  padding-bottom: 1.5rem;
+}
+
+.FormBox {
+  background-color: rgb(50, 65, 87);
+  max-width: 900px;
+  color: white;
+}
+
+.InputForm {
+  padding-bottom: 2rem;
+  margin: 0rem 2rem;
+  max-width: 600px;
 }
 
 .GameContainer {
@@ -68,54 +134,6 @@ html {
   color: black;
   font-size: 3.5rem;
   max-height: 8rem;
-}
-
-.FormBox {
-  background-color: rgb(50, 65, 87);
-  max-width: 900px;
-  margin: 6rem auto;
-  color: white;
-}
-
-.LoggedIn {
-  display: flex;
-  max-height: 12vh;
-}
-
-.titleLogo {
-  padding-top: 2vh;
-  display: flex;
-  width: 100%;
-}
-
-.LoggedOut {
-  display: block;
-  padding-top: 4vh;
-}
-
-.loggedOutLogo {
-  display: flex;
-  max-height: 20vh;
-}
-
-.logo {
-  object-fit: contain;  /* maintains proportions of image */
-  margin: 0 auto;
-  padding-right: 3.5rem;
-}
-
-.auth-section p {
-  font-size: 1.8rem;
-  font-weight: bold;
-  padding: 3rem 0 2rem 1rem;
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.InputForm {
-  padding-bottom: 2rem;
-  margin: 0rem 2rem;
-  max-width: '600px';
 }
 
 .PausedText {
