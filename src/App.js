@@ -11,6 +11,11 @@ import { userLogout } from './actions/userLogout'
 
 class App extends Component {
 
+  state = {
+    win: null,
+    boardSize: null
+  }
+
   handleLogout = event => {
     event.preventDefault()
     this.props.userLogout()
@@ -30,6 +35,12 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getCurrentUser()
+    this.setState({
+      win: window.visualViewport.width * .7
+    })
+    this.setState((state) => ({
+      boardSize: state.win > 850 ? 850 : state.win
+    }))
   }
 }
 
