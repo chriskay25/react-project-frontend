@@ -13,9 +13,6 @@ class GameContainer extends Component {
     super(props)
     const { boardSize, playerSize } = this.props
     this.state = {
-      boardSize: boardSize,
-      playerSize: playerSize,
-      enemySize: playerSize,
       gameOver: true,
       score: 0,
       timeElapsed: 0,
@@ -35,7 +32,7 @@ class GameContainer extends Component {
 
   handlePlayerMovement = (e) => {
     const { x, y } = this.state.positions.player
-    const { boardSize, playerSize } = this.state
+    const { boardSize, playerSize } = this.props
 
     switch (e.keyCode) {
       case 38:  // Up arrow
@@ -114,7 +111,7 @@ class GameContainer extends Component {
 
   createNewEnemy = () => {
     const { player } = this.state.positions
-    const { boardSize, playerSize } = this.state
+    const { boardSize, playerSize } = this.props
     let newEnemy;
 
     this.setState({
@@ -147,7 +144,8 @@ class GameContainer extends Component {
   }
 
   updateEnemyPositions = () => {
-    const { boardSize, playerSize, speed, positions: {enemies}, positions: {player} } = this.state
+    const { speed, positions: {enemies}, positions: {player} } = this.state
+    const { boardSize, playerSize } = this.props
     this.setState({
       positions: {
         ...this.state.positions,
@@ -271,8 +269,6 @@ class GameContainer extends Component {
     const { boardSize, playerSize } = this.props
 
     this.setState({
-      boardSize: boardSize,
-      playerSize: playerSize,
       score: 0,
       timeElapsed: 0,
       speed: 5,
@@ -290,7 +286,8 @@ class GameContainer extends Component {
   }
 
   render() {
-    const { paused, score, speed, timeElapsed, boardSize, playerSize, enemySize, positions, enemyInterval, gameOver } = this.state
+    const { paused, score, speed, timeElapsed, positions, enemyInterval, gameOver } = this.state
+    const { boardSize, playerSize, enemySize } = this.props
     return (
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver}>
