@@ -1,36 +1,42 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import GameContainer from './GameContainer';
 import Instructions from '../components/Instructions';
-import { userLogout } from '../actions/userLogout'
 import { getCurrentUser } from '../actions/getCurrentUser'
 
-class UsersContainer extends Component {
+const UsersContainer = () => {
+  const currentUser = useSelector(state => state.currentUser)
+  const dispatch = useDispatch()
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+  const [board, setBoard] = useState(dimensions.width)
 
-  render() {
-    const { currentUser } = this.props
-    const win = window.visualViewport.width * .7
-    const boardSize = win > 850 ? 850 : win
-    const playerSize = boardSize / 30
-    return (
-      <>
-        <Instructions />
-        <GameContainer boardSize={boardSize} playerSize={playerSize} currentUser={currentUser} />
-      </>
-    )
-  }
+  useEffect(() => {
+    dispatch(getCurrentUser())
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    }
+    dispatch(() => {
+      setBoard(dimensions.width < 610 ? dimensions.width : 610)
+    })
 
-  componentDidMount() {
-    this.props.getCurrentUser()
-  }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [dispatch, dimensions])
+
+  return (
+    <>
+      <Instructions />
+      <GameContainer boardSize={board} playerSize={board / 30} enemySize={board / 30} currentUser={currentUser} />
+    </>
+  )
 }
 
-const mapState = (state) => ({
-  currentUser: state.currentUser
-})
-
-export default connect(
-  mapState,
-  {userLogout,
-  getCurrentUser}
-)(UsersContainer)
+export default UsersContainer
