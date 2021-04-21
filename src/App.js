@@ -27,6 +27,10 @@ class App extends Component {
       </div>
     )
   }
+
+  componentDidMount() {
+    this.props.getCurrentUser()
+  }
 }
 
 const mapState = (state) => ({
