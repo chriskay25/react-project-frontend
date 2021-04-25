@@ -31,12 +31,12 @@ class GameContainer extends Component {
   }
 
   handlePlayerMovement = (e) => {
+    const { paused } = this.state
     const { x, y } = this.state.positions.player
     const { boardSize, playerSize } = this.props
-
     switch (e.keyCode) {
       case 38:  // Up arrow
-        if (y <= 0) {
+        if (y <= 0 || paused) {
           return;
         } else {
           this.setState({
@@ -51,7 +51,7 @@ class GameContainer extends Component {
         }
         break;
       case 40:  // Down arrow
-        if (y > boardSize - playerSize) {
+        if ((y > boardSize - playerSize) || paused) {
           return;
         } else {
           this.setState({
@@ -66,7 +66,7 @@ class GameContainer extends Component {
         }
         break;
       case 37:  // Left arrow
-        if (x < 0) {
+        if (x < 0 || paused) {
           return;
         } else {
           this.setState({
@@ -81,7 +81,7 @@ class GameContainer extends Component {
         }
         break;
       case 39:  // Right arrow
-        if (x > (boardSize - playerSize)) {
+        if ((x > (boardSize - playerSize  )) || paused) {
           return;
         } else {
           this.setState({
@@ -222,6 +222,7 @@ class GameContainer extends Component {
   }
 
   pauseGame = () => {
+    if (this.state.gameOver) return
     if (!this.state.paused) {
       const { score, speed, timeElapsed, enemyInterval } = this.state
       clearInterval(this.timeInterval)
@@ -290,7 +291,7 @@ class GameContainer extends Component {
     const { boardSize, playerSize, enemySize } = this.props
     return (
       <div className="GameContainer">
-        <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver}>
+        <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver} startGame={this.startGame}>
           <User gameOver={gameOver} currentUser={this.props.currentUser} />
           <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
           {this.state.positions.enemies.map(enemy => 
