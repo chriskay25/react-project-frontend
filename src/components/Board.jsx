@@ -7,29 +7,23 @@ class Board extends Component {
     const { boardSize, paused, gameOver } = this.props
       if (paused) {
         return {
-          position: 'relative',
-          width: `${boardSize}px`,
-          height: `${boardSize}px`,
-          margin: '0 auto',
+          width: `${boardSize}px`, 
+          height: `${boardSize}px`, 
           border: '10px black solid',
           backgroundImage: `radial-gradient(orange, lightblue)`
         }  
       } else if (gameOver) {
         return {
-          position: 'relative',
           width: `${boardSize}px`,
           height: `${boardSize}px`,
-          margin: '0 auto',
-          background: 'linear-gradient(45deg, crimson, black)',
+          backgroundImage: 'linear-gradient(45deg, crimson, black)',
           backgroundSize: '300%',
           animation: 'game-over-animation 1s ease forwards'
         }
       } else {
         return {
-          position: 'relative',
           width: `${boardSize}px`,
           height: `${boardSize}px`,
-          margin: '0 auto',
           border: '10px lightblue solid',
           backgroundImage: `url(${boardBackground})`
         }
@@ -37,9 +31,9 @@ class Board extends Component {
   }
 
   render() {
-    const { paused, gameOver } = this.props
+    const { paused, gameOver, startGame } = this.props
     return (
-      <div className="Board" style={this.style()}>
+      <div className="board" style={this.style()}>
         {this.props.children}
         <p className="PausedText">
           {paused ? 'Paused' : null}
@@ -47,6 +41,7 @@ class Board extends Component {
         <p className="game-over-text">
           {gameOver ? 'Game Over' : null}
         </p>
+        {gameOver ? <button className='reset-button' onClick={startGame}>New Game</button> : null}
       </div>
     ) 
   }
