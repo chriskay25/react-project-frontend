@@ -11,7 +11,7 @@ const UsersContainer = () => {
     height: window.innerHeight,
     width: window.innerWidth
   })
-  const [board, setBoard] = useState(dimensions.width)
+  const [board, setBoard] = useState(dimensions.width < 610 ? dimensions.width : 610)
 
   useEffect(() => {
     dispatch(getCurrentUser())
@@ -29,7 +29,7 @@ const UsersContainer = () => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [dispatch, dimensions])
+  }, [dispatch, dimensions, board])
 
   return (
     <>
