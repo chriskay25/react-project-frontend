@@ -34,7 +34,7 @@ const UsersContainer = () => {
   return (
     <>
       <Instructions />
-      <GameContainer boardSize={board} playerSize={board / 30} enemySize={board / 30} currentUser={currentUser} />
+      <GameContainer boardSize={board} currentUser={currentUser} />
     </>
   )
 }
