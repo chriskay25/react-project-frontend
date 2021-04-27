@@ -1,12 +1,16 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import playerCircle from '../assets/Circle-1.png'
 
 
-class Player extends Component {
+const Player = ({playerPosition, playerSize, handleKeyDown, handleKeyUp}) => {
+
+  useEffect(() => {
+    window.onkeydown = handleKeyDown
+    window.onkeyup = handleKeyUp
+  })
   
-  style = (props) => {
-    const { x, y } = this.props.playerPosition
-    const { playerSize } = this.props
+  const style = () => {
+    const { x, y } = playerPosition
     return {
       position: 'absolute',
       left: `${x}px`,
@@ -15,15 +19,10 @@ class Player extends Component {
     }
   }
   
-  render() {
-    return (
-      <img src={playerCircle} alt="Player" style={this.style()} onKeyDown={this.props.handlePlayerMovement} tabIndex="0" />
-    )
-  }
+  return (
+    <img src={playerCircle} style={style()} alt="Player" tabIndex="0" />
+  )
 
-  componentDidMount() {
-    window.onkeydown = this.props.handlePlayerMovement;
-  }
 }
 
 export default Player

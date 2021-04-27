@@ -34,152 +34,115 @@ class GameContainer extends Component {
     }
   }
 
-  handlePlayerMovement = (e) => {
-    const { paused } = this.state
-    const { x, y } = this.state.positions.player
-    const { boardSize, playerSize } = this.props
-
+  handleKeyDown = (e) => {
     switch (e.key) {
-      case 'ArrowUp':  // Up arrow
-        if (y <= 0 || paused) {
-          return;
-        } else {
-          this.setState({
-            positions: {
-              ...this.state.positions,
-              player: {
-                x,
-                y: y - 10
-              }
-            }
-          })
-        }
+      case 'ArrowUp': 
+        this.setState({
+          up: true
+        })
         break;
-      case 'ArrowDown':  // Down arrow
-        if ((y > boardSize - playerSize) || paused) {
-          return;
-        } else {
-          this.setState({
-            positions: {
-              ...this.state.positions,
-              player: {
-                x,
-                y: y + 10
-              }
-            }
-          })
-        }
+      case 'ArrowDown':
+        this.setState({
+          down: true
+        })
         break;
-      case 'ArrowLeft':  // Left arrow
-        if (x < 0 || paused) {
-          return;
-        } else {
-          this.setState({
-            positions: {
-              ...this.state.positions,
-              player: {
-                x: x - 10,
-                y
-              }
-            }
-          })
-        }
+      case 'ArrowLeft':
+        this.setState({
+          left: true
+        })
         break;
-      case 'ArrowRight':  // Right arrow
-        if ((x > (boardSize - playerSize  )) || paused) {
-          return;
-        } else {
-          this.setState({
-            positions: {
-              ...this.state.positions,
-              player: {
-                x: x + 10,
-                y
-              }
-            }
-          })
-        }
-        break;
-      case 'Enter':  // Space bar
-        this.pauseGame()
+      case 'ArrowRight':
+        this.setState({
+          right: true
+        })
         break;
       default:
         return;
     }
   }
 
-  // handlePlayerMovement = (e) => {
-  //   const { paused } = this.state
-  //   const { x, y } = this.state.positions.player
-  //   const { boardSize, playerSize } = this.props
-  //   switch (e.keyCode) {
-  //     case 38:  // Up arrow
-  //       if (y <= 0 || paused) {
-  //         return;
-  //       } else {
-  //         this.setState({
-  //           positions: {
-  //             ...this.state.positions,
-  //             player: {
-  //               x,
-  //               y: y - 10
-  //             }
-  //           }
-  //         })
-  //       }
-  //       break;
-  //     case 40:  // Down arrow
-  //       if ((y > boardSize - playerSize) || paused) {
-  //         return;
-  //       } else {
-  //         this.setState({
-  //           positions: {
-  //             ...this.state.positions,
-  //             player: {
-  //               x,
-  //               y: y + 10
-  //             }
-  //           }
-  //         })
-  //       }
-  //       break;
-  //     case 37:  // Left arrow
-  //       if (x < 0 || paused) {
-  //         return;
-  //       } else {
-  //         this.setState({
-  //           positions: {
-  //             ...this.state.positions,
-  //             player: {
-  //               x: x - 10,
-  //               y
-  //             }
-  //           }
-  //         })
-  //       }
-  //       break;
-  //     case 39:  // Right arrow
-  //       if ((x > (boardSize - playerSize  )) || paused) {
-  //         return;
-  //       } else {
-  //         this.setState({
-  //           positions: {
-  //             ...this.state.positions,
-  //             player: {
-  //               x: x + 10,
-  //               y
-  //             }
-  //           }
-  //         })
-  //       }
-  //       break;
-  //     case 32:  // Space bar
-  //       this.pauseGame()
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // }
+  handleKeyUp = (e) => {
+    switch (e.key) {
+      case 'ArrowUp': 
+        this.setState({
+          up: false
+        })
+        break;
+      case 'ArrowDown':
+        this.setState({
+          down: false
+        })
+        break;
+      case 'ArrowLeft':
+        this.setState({
+          left: false
+        })
+        break;
+      case 'ArrowRight':
+        this.setState({
+          right: false
+        })
+        break;
+      default:
+        return;
+    }
+  }
+
+  handlePlayerMovement = (e) => {
+    const { paused } = this.state
+    const { x, y } = this.state.positions.player
+    const { boardSize, playerSize } = this.props
+    const { up, down, left, right } = this.state
+
+    if (up && y >= 0 && !paused) {
+      this.setState({
+        positions: {
+          ...this.state.positions,
+          player: {
+            x,
+            y: y - 10
+          }
+        }
+      })
+    }
+
+    if (down && (y < boardSize - playerSize) && !paused) {
+      this.setState({
+        positions: {
+          ...this.state.positions,
+          player: {
+            x,
+            y: y + 10
+          }
+        }
+      })
+    }
+
+    if (left && x > 0 && !paused) {
+      this.setState({
+        positions: {
+          ...this.state.positions,
+          player: {
+            x: x - 10,
+            y
+          }
+        }
+      })
+    }
+
+    if (right && (x < (boardSize - playerSize)) && !paused) {
+      this.setState({
+        positions: {
+          ...this.state.positions,
+          player: {
+            x: x + 10,
+            y
+          }
+        }
+      })
+    }
+
+  }
 
   randomSide = (min, max) => {
     min = Math.ceil(min)
@@ -222,7 +185,7 @@ class GameContainer extends Component {
   }
 
   updateEnemyPositions = () => {
-    const { speed, positions: {enemies}, positions: {player} } = this.state
+    const { speed, positions: {enemies} } = this.state
     const { boardSize, playerSize } = this.props
     this.setState({
       positions: {
@@ -266,6 +229,7 @@ class GameContainer extends Component {
     this.timeInterval = setInterval(this.updateTime, 1000)
     this.scoreInterval = setInterval(this.updateScore, 100)
     this.enemyInterval = setInterval(this.updateEnemyPositions, 50)
+    this.playerInterval = setInterval(this.handlePlayerMovement, 50)
     this.enemyCreationInterval = setInterval(this.createNewEnemy, enemyInterval)
   }
 
@@ -371,7 +335,7 @@ class GameContainer extends Component {
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver} startGame={this.startGame}>
           <User gameOver={gameOver} currentUser={this.props.currentUser} />
-          <Player playerPosition={positions.player} playerSize={playerSize} handlePlayerMovement={this.handlePlayerMovement} />
+          <Player playerPosition={positions.player} playerSize={playerSize} handleKeyDown={this.handleKeyDown} handleKeyUp={this.handleKeyUp} />
           {this.state.positions.enemies.map(enemy => 
             <Enemy
               key={enemy.key}
@@ -389,13 +353,6 @@ class GameContainer extends Component {
 
   componentDidMount() {
     this.startGame()
-    document.onkeydown = (e) => {
-      if (e.key === 'ArrowUp') {
-        this.setState({
-          up: true
-        })
-      }
-    }
   }
 
   componentWillUnmount() {
