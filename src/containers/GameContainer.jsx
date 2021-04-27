@@ -59,6 +59,9 @@ class GameContainer extends Component {
           right: true
         })
         break;
+      case ' ':
+        this.pauseGame()
+        break;
       default:
         return;
     }
@@ -263,12 +266,6 @@ class GameContainer extends Component {
     }))
   }
 
-  pauseWithSpace = (event) => {
-    if (event.key === 32) {
-      this.pauseGame()
-    }
-  }
-
   pauseGame = () => {
     if (this.state.gameOver) return
     if (!this.state.paused) {
@@ -339,11 +336,11 @@ class GameContainer extends Component {
 
   render() {
     const { paused, score, speed, timeElapsed, positions, enemyInterval, gameOver, playerSize, enemySize } = this.state
-    const { boardSize } = this.props
+    const { boardSize, currentUser, highScore } = this.props
     return (
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver} startGame={this.startGame}>
-          <User gameOver={gameOver} currentUser={this.props.currentUser} />
+          <User gameOver={gameOver} currentUser={currentUser} highScore={highScore} />
           <Player playerPosition={positions.player} playerSize={playerSize} handleKeyDown={this.handleKeyDown} handleKeyUp={this.handleKeyUp} />
           {this.state.positions.enemies.map(enemy => 
             <Enemy
@@ -374,7 +371,8 @@ class GameContainer extends Component {
 }
 
 const mapState = (state) => ({
-  currentUser: state.currentUser
+  currentUser: state.currentUser,
+  highScore: state.highScore
 })
 
 export default connect(
