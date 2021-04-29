@@ -160,7 +160,7 @@ class GameContainer extends Component {
   createNewEnemy = () => {
     const { player } = this.state.positions
     const { boardSize } = this.props
-    const { playerSize } = this.state
+    const { playerSize, enemyInterval, gameOver, paused } = this.state
     let newEnemy;
 
     this.setState({
@@ -190,6 +190,10 @@ class GameContainer extends Component {
         enemies: [...this.state.positions.enemies].concat(newEnemy)
       }
     })
+
+    if (!gameOver && !paused) {
+      this.enemyCreationInterval = setTimeout(this.createNewEnemy, enemyInterval)
+    }
   }
 
   updateEnemyPositions = () => {
@@ -235,12 +239,11 @@ class GameContainer extends Component {
       score: 0
     })
     const { enemyInterval } = this.state
-    this.createNewEnemy()
     this.timeInterval = setInterval(this.updateTime, 1000)
     this.scoreInterval = setInterval(this.updateScore, 100)
     this.enemyInterval = setInterval(this.updateEnemyPositions, 50)
     this.playerInterval = setInterval(this.handlePlayerMovement, 20)
-    this.enemyCreationInterval = setInterval(this.createNewEnemy, enemyInterval)
+    this.enemyCreationInterval = setTimeout(this.createNewEnemy, enemyInterval)
   }
 
   updateTime = () => {
@@ -255,11 +258,9 @@ class GameContainer extends Component {
     } 
     
     if (this.state.timeElapsed % 5 === 0) {
-      clearInterval(this.enemyCreationInterval)
       this.setState({
         enemyInterval: this.state.enemyInterval - 100
       })
-      this.enemyCreationInterval = setInterval(this.createNewEnemy, this.state.enemyInterval)
     }
   }
 
@@ -270,12 +271,13 @@ class GameContainer extends Component {
   }
 
   pauseGame = () => {
-    if (this.state.gameOver) return
-    if (!this.state.paused) {
-      const { score, speed, timeElapsed, enemyInterval } = this.state
+    const { gameOver, paused, score, speed, timeElapsed, enemyInterval } = this.state
+
+    if (gameOver) return
+    if (!paused) {
       clearInterval(this.timeInterval)
       clearInterval(this.scoreInterval)
-      clearInterval(this.enemyCreationInterval)
+      clearTimeout(this.enemyCreationInterval)
       this.setState({
         paused: true,
         speed: 0,
@@ -289,7 +291,7 @@ class GameContainer extends Component {
       const { savedScore, savedSpeed, savedTime, savedInterval } = this.state
       this.timeInterval = setInterval(this.updateTime, 1000)
       this.scoreInterval = setInterval(this.updateScore, 50)
-      this.enemyCreationInterval = setInterval(this.createNewEnemy, 3000)
+      this.enemyCreationInterval = setTimeout(this.createNewEnemy, savedInterval)
       this.setState({
         paused: false,
         speed: savedSpeed,
