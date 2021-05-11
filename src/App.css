@@ -18,6 +18,9 @@ html {
   .auth-forms {
     min-width: 100vw;
   }
+  .highscores-container {
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 700px) {
@@ -27,6 +30,9 @@ html {
   .auth-forms {
     max-width: 85vw;
   }
+  .highscores-container {
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 1000px) {
@@ -35,11 +41,11 @@ html {
   }
 }
 
-@media screen and (min-width: 1250px) {
+/* @media screen and (min-width: 1250px) {
   html {
     font-size: 14px;
   }
-}
+} */
 
 /* @media screen and (min-width: 1600px) {
   html {
@@ -212,18 +218,43 @@ html {
   margin-top: 4rem;
 }
 
-.high-scores {
+.highscores-container {
   border-radius: 1rem;
   background-color: mediumaquamarine;
-  width: 50%;
   padding: 0rem;
   margin: 50px auto;
+}
+
+.highscores {
+  display: flex;
+  justify-content: space-between;
+}
+
+.highscores h2 {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.users-highscores {
+  width: 50%;
   text-align: center;
 }
 
-.high-score {
-  font-size: 1.5rem;
-  padding: 1rem;
+.all-time-highscores {
+  width: 50%;
+  text-align: center;
+}
+
+.highscore {
+  font-size: 2rem;
+  padding: .5rem;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  padding: 0;
 }
 
 button {
