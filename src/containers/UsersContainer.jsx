@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import GameContainer from './GameContainer';
 import Instructions from '../components/Instructions';
 import { getCurrentUser } from '../actions/getCurrentUser'
+import HighScores from '../components/HighScores'
+import { Link, Route, Switch } from 'react-router-dom'
 
 const UsersContainer = () => {
   const currentUser = useSelector(state => state.currentUser)
@@ -32,10 +34,21 @@ const UsersContainer = () => {
   }, [dispatch, dimensions, board])
 
   return (
-    <>
-      <Instructions />
-      <GameContainer boardSize={board} currentUser={currentUser} />
-    </>
+    <div className='users-container'>
+      <div className='users-container-links'>
+        <Link to='/game'>Play Game</Link>
+        <Link to='/highscores'>High Scores</Link>
+      </div>
+      <Switch>
+        <Route exact path='/game'>
+          <Instructions />
+          <GameContainer boardSize={board} currentUser={currentUser} />
+        </Route>
+        <Route exact path='/highscores'>
+          <HighScores currentUser={currentUser} />
+        </Route>
+      </Switch>
+    </div>
   )
 }
 
