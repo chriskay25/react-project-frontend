@@ -1,8 +1,8 @@
 import React from 'react'
 
-const GameStats = ({ score }) => {
+const GameStats = ({ score, gameOver }) => {
   return (
-    <div className="GameStats">
+    <div className={gameOver ? 'GameStats game-over-score' : 'GameStats'}>
       <p>Score: {score}</p>
     </div>
   )
