@@ -3,15 +3,14 @@
 }
 
 html {
-  font-size: 16px;
-
+  font-size: 14px;
   margin: 0;
   padding: 0;
   border: none;
   outline: none;
 }
 
-@media screen and (max-width: 699px) {
+@media screen and (max-width: 700px) {
   html {
     font-size: 8px;
   }
@@ -154,7 +153,7 @@ html {
 
 .GameStats {
   position: absolute;
-  right: 1rem;;
+  right: 1rem;
   bottom: 0;
   color: black;
   font-size: 3.5rem;
@@ -219,10 +218,11 @@ html {
 }
 
 .highscores-container {
+  max-width: 700px;
   border-radius: 1rem;
-  background-color: mediumaquamarine;
-  padding: 0rem;
-  margin: 50px auto;
+  background-image: radial-gradient(turquoise, rgb(110, 177, 185));
+  padding: 2rem 0;
+  margin: 12vh auto;
 }
 
 .highscores {
@@ -237,12 +237,7 @@ html {
   text-decoration: underline;
 }
 
-.users-highscores {
-  width: 50%;
-  text-align: center;
-}
-
-.all-time-highscores {
+.highscores-col {
   width: 50%;
   text-align: center;
 }
@@ -317,6 +312,12 @@ a:link, a:visited {
 
 a:hover, a:focus {
   border-bottom: .2rem solid lightblue;
+}
+
+.users-container-links {
+  position: absolute;
+  left: 0;
+  bottom: 1rem;
 }
 
 
