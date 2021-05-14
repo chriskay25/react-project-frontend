@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getHighScores } from '../actions/getHighScores'
 import HighScore from './HighScore'
+import { Link } from 'react-router-dom'
 
 const HighScores = ({ currentUser }) => {
   const dispatch = useDispatch()
@@ -24,14 +25,15 @@ const HighScores = ({ currentUser }) => {
   }
 
   return (
-    <div className='highscores-container' style={{maxWidth: '450px', padding: '2rem'}}>
+    <div className='highscores-container'>
+      <Link to='/game'>Play Game</Link>
       <h1 style={{textAlign: 'center', fontSize: '4rem'}}>HIGH SCORES</h1>
       <div className="highscores">
-        <div className='users-highscores'>
+        <div className='highscores-col'>
           <h2>All Time</h2>
           {showHighScores()}
         </div>
-        <div className='all-time-highscores'>
+        <div className='highscores-col'>
           <h2>{currentUser.username + "'s"}</h2>
           {showUsersHighScores()}
         </div>
