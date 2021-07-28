@@ -12,7 +12,6 @@ export const saveGame = (data) => {
     })
     .then(response => response.json())
     .then(gameData => {
-      console.log("gameData: ", gameData)
       if (gameData.error) {
         alert(gameData.error)
       } else {
