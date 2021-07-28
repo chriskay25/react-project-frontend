@@ -8,7 +8,7 @@ const User = ({ currentUser, gameOver, highScore, newHighScore }) => {
         <p><strong>High Score:</strong> {highScore ? highScore : currentUser.highScore}</p>
       </div>
       <div className='new-highscore'>
-        {newHighScore ? <p>New High Score!!!</p> : ''}
+        {newHighScore ? <h1>New High Score!</h1> : ''}
       </div>
     </>
   )
