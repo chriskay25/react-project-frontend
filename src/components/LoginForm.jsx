@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { userLogin } from '../actions/userLogin';
+import { Link } from 'react-router-dom'
 
 class LoginForm extends Component {
 
@@ -39,6 +40,7 @@ class LoginForm extends Component {
           <br />
           <input type="submit" value="Login" />
         </form>
+        <Link to='/users/new' className='form-switch'> Need to sign up?</Link>
       </div>
     )
   }
