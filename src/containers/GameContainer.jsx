@@ -250,6 +250,7 @@ class GameContainer extends Component {
     this.setState((state) => ({ 
       timeElapsed: state.timeElapsed + 1,
     }))
+    
     if (this.state.timeElapsed % 10 === 0) {
       this.setState({
         speed: this.state.speed + 1,
@@ -360,7 +361,7 @@ class GameContainer extends Component {
               gameOver={this.gameOver}
             />
           )}
-          <GameStats score={score} time={timeElapsed} speed={speed} enemyInterval={enemyInterval}  />
+          <GameStats score={score} time={timeElapsed} speed={speed} enemyInterval={enemyInterval} gameOver={gameOver} />
         </Board>
       </div>
     )
