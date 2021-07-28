@@ -10,6 +10,10 @@ html {
   outline: none;
 }
 
+body {
+    background-color: #282c34;
+}
+
 @media screen and (max-width: 700px) {
   html {
     font-size: 8px;
@@ -74,9 +78,12 @@ html {
 
 .App {
   min-height: 100vh;
+  max-width: 1200px;
   overflow: hidden;
   scrollbar-width: none;
   background-color: #282c34;
+  margin: 0 auto;
+  position: relative;
 }
 
 .logo {
@@ -107,12 +114,24 @@ html {
 
 .form-links {
   padding-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-links a {
+    font-size: 20px;
 }
 
 .FormBox {
   background-color: rgb(50, 65, 87);
   max-width: 900px;
   color: white;
+  position: relative;
+}
+
+.form-switch {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .InputForm {
@@ -123,7 +142,7 @@ html {
 
 .GameContainer {
   max-height: 75vh;
-  min-width: 100vw;
+  width: 100%;
   color: #282c34;
   /* overflow: hidden; */
 }
@@ -161,7 +180,7 @@ html {
   opacity: 75%;
 }
 
-.PausedText {
+.paused-text {
   position: absolute;
   width: 100%;
   margin: 0;
@@ -314,10 +333,17 @@ a:hover, a:focus {
   border-bottom: .2rem solid lightblue;
 }
 
-.users-container-links {
-  position: absolute;
-  left: 0;
-  bottom: 1rem;
+.home-links {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.home-links a {
+    font-size: 20px;
+}
+
+.hidden {
+  display: none;
 }
 
 
