@@ -3,7 +3,7 @@ import boardBackground from '../assets/cheap_diagonal_fabric.png';
 
 class Board extends Component {
 
-  style = (props) => {
+  style = () => {
     const { boardSize, paused, gameOver } = this.props
       if (paused) {
         return {
@@ -33,14 +33,10 @@ class Board extends Component {
   render() {
     const { paused, gameOver, startGame } = this.props
     return (
-      <div className="board" style={this.style()}>
+      <div className='board' style={this.style()}>
         {this.props.children}
-        <p className="PausedText">
-          {paused ? 'Paused' : null}
-        </p>
-        <p className="game-over-text">
-          {gameOver ? 'Game Over' : null}
-        </p>
+        <p className='paused-text'>{paused ? 'Paused' : null}</p>
+        <p className='game-over-text'>{gameOver ? 'Game Over' : null}</p>
         {gameOver ? <button className='reset-button' onClick={startGame}>New Game</button> : null}
       </div>
     ) 
