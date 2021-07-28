@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getHighScores } from '../actions/getHighScores'
+import { getCurrentUser } from '../actions/getCurrentUser'
 import HighScore from './HighScore'
 import { Link } from 'react-router-dom'
 
-const HighScores = ({ currentUser }) => {
+const HighScores = () => {
   const dispatch = useDispatch()
+  const currentUser = useSelector(state => state.currentUser)
   const games = useSelector(state => state.highScores)
 
   useEffect(() => {
+    dispatch(getCurrentUser())
     dispatch(getHighScores())
   }, [dispatch])
 
@@ -20,7 +23,7 @@ const HighScores = ({ currentUser }) => {
 
   const showUsersHighScores = () => {
     return currentUser.highScores.map((game) => {
-      return <HighScore key={game.score.id} usersScore={game} />
+      return <HighScore key={game.id} usersScore={game} />
     })
   }
 
