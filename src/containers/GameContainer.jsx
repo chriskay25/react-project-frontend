@@ -21,6 +21,7 @@ class GameContainer extends Component {
       newHighScore: false,
       timeElapsed: 0,
       speed: 5,
+      bombs: 3,
       paused: false,
       enemyInterval: 2500,
       enemyID: 0,
@@ -59,6 +60,9 @@ class GameContainer extends Component {
         this.setState({
           right: true
         })
+        break;
+      case 'Shift':
+        this.useBomb()
         break;
       case ' ':
         this.pauseGame()
@@ -236,7 +240,8 @@ class GameContainer extends Component {
     this.setState({
       newHighScore: false,
       gameOver: false,
-      score: 0
+      score: 0,
+      bombs: 3
     })
     const { enemyInterval } = this.state
     this.timeInterval = setInterval(this.updateTime, 1000)
@@ -269,6 +274,21 @@ class GameContainer extends Component {
     this.setState((state) => ({
       score: state.score + 1
     }))
+  }
+
+  useBomb = () => {
+    const { bombs } = this.state
+    if (bombs > 0) {
+      this.setState({
+        positions: {
+          ...this.state.positions,
+          enemies: []
+        }
+      })
+      this.setState((state) => ({
+        bombs: state.bombs - 1
+      }))
+    }
   }
 
   pauseGame = () => {
@@ -345,12 +365,12 @@ class GameContainer extends Component {
   }
 
   render() {
-    const { paused, score, speed, timeElapsed, positions, enemyInterval, gameOver, playerSize, enemySize, newHighScore } = this.state
+    const { paused, score, speed, timeElapsed, positions, enemyInterval, gameOver, playerSize, enemySize, newHighScore, bombs } = this.state
     const { boardSize, currentUser, highScore } = this.props
     return (
       <div className="GameContainer">
         <Board boardSize={boardSize} playerSize={playerSize} paused={paused} gameOver={gameOver} startGame={this.startGame}>
-          <User gameOver={gameOver} currentUser={currentUser} highScore={highScore} newHighScore={newHighScore} />
+          <User gameOver={gameOver} currentUser={currentUser} highScore={highScore} newHighScore={newHighScore} bombs={bombs} />
           <Player playerPosition={positions.player} playerSize={playerSize} handleKeyDown={this.handleKeyDown} handleKeyUp={this.handleKeyUp} gameOver={gameOver} />
           {this.state.positions.enemies.map(enemy => 
             <Enemy
