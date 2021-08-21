@@ -6,6 +6,7 @@ import GameStats from '../components/GameStats';
 import User from '../components/User'
 import { connect } from 'react-redux'
 import { saveGame } from '../actions/saveGame'
+import { getHighScore } from '../actions/getHighScore'
 
 class GameContainer extends Component {
 
@@ -325,11 +326,12 @@ class GameContainer extends Component {
 
   gameOver = () => {
     const { score } = this.state
+    const { highScore } = this.props.highScore
     this.setState({
       gameOver: true
     }) 
     this.props.saveGame({score})
-    if (score > this.props.currentUser.highScore) {
+    if (score > highScore) {
       this.setState({
         newHighScore: true
       })
@@ -388,6 +390,8 @@ class GameContainer extends Component {
   }
 
   componentDidMount() {
+    const { currentUser } = this.props
+    this.props.getHighScore(currentUser.id)
     this.startGame()
   }
 
@@ -407,5 +411,5 @@ const mapState = (state) => ({
 
 export default connect(
   mapState, 
-  { saveGame }
+  { saveGame, getHighScore }
 )(GameContainer)
