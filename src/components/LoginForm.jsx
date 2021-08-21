@@ -4,10 +4,12 @@ import { userLogin } from '../actions/userLogin';
 import { Link } from 'react-router-dom'
 
 class LoginForm extends Component {
-
-  state = {
-    username: '',
-    password: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      password: ''
+    }
   }
 
   handleChange = (event) => {
@@ -18,8 +20,8 @@ class LoginForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    // const { username, password } = this.state
-    this.props.userLogin(this.state)
+    const { history } = this.props
+    this.props.userLogin(this.state, history)
     this.setState({
       username: '',
       password: '',

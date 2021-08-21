@@ -1,4 +1,4 @@
-export const userLogin = (data) => {
+export const userLogin = (data, history) => {
   return (dispatch) => {
     fetch('http://localhost:3000/api/v1/login', {
       headers: {
@@ -15,6 +15,7 @@ export const userLogin = (data) => {
           alert("Invalid Credentials")
         } else {
           localStorage.setItem('token', userData.jwt)
+          history.push('/home')
           dispatch({
             type: 'USER_LOGIN',
             payload: userData.user
