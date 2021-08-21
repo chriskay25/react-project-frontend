@@ -1,18 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
-import { Route, Link } from 'react-router-dom'
-
+import { Route, Link, Switch, useLocation } from 'react-router-dom'
 
 const AuthForms = () => {
-    const [clicked, setClicked] = useState(false)
-    const handleClick = () => setClicked(true)
+    const location = useLocation()
 
     return (
         <div className='auth-forms'>
-            {!clicked && <div className='form-links'>
-                <Link to='/users/new' onClick={handleClick}> Sign Up</Link>
-                <Link to='/login' onClick={handleClick}>Log In</Link>   
+            {location.pathname === '/' && <div className='form-links'>
+                <Link to='/users/new'> Sign Up</Link>
+                <Link to='/login'>Log In</Link>   
             </div>}
             
             <Route exact path="/users/new" component={SignupForm} />
