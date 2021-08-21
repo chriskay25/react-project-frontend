@@ -25,6 +25,11 @@ export default function reducer(state = {currentUser: null, highScore: null, hig
         ...state,
         highScore: action.payload.user.highScore
       }
+    case 'GET_HIGH_SCORE':
+      return {
+        ...state,
+        highScore: action.payload
+      }
     case 'GET_HIGH_SCORES':
       return {
         ...state,
