@@ -1,9 +1,11 @@
 import React from 'react'
 
-const GameStats = ({ score, gameOver }) => {
+const GameStats = ({ time, speed, enemyInterval }) => {
   return (
-    <div className={gameOver ? 'GameStats game-over-score' : 'GameStats'}>
-      <span>Score: {score}</span>
+    <div className='game-stats'>
+      <div>Time: {time}</div>
+      <div>Speed: {speed}</div>
+      <div>Enemy Spawn: {enemyInterval}</div>
     </div>
   )
 }
