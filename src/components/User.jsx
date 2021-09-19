@@ -1,6 +1,6 @@
 import React from 'react';
 
-const User = ({ currentUser, gameOver, highScore, newHighScore, bombs }) => {
+const User = ({ currentUser, gameOver, score, highScore, newHighScore, bombs }) => {
   return (
     <>
       <div className={gameOver ? 'User game-over-user-info' : 'User'}>
@@ -11,6 +11,9 @@ const User = ({ currentUser, gameOver, highScore, newHighScore, bombs }) => {
         {newHighScore ? <h1>New High Score!</h1> : ''}
       </div>
       <span className='bombs'><strong>Bombs:</strong> {bombs}</span>
+      <div className={gameOver ? 'score game-over-score' : 'score'}>
+        <span>Score: {score}</span>
+    </div>
     </>
   )
 }
