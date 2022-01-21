@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
+import logoutIcon from "../assets/logout-1.png";
 
 const Logout = ({ handleLogout }) => {
   return (
-    <form className="UserLogout" onSubmit={handleLogout} style={{position: 'absolute', right: 10, top: 0}}>
+    <form className="user-logout" onSubmit={handleLogout}>
       <input type="submit" value="Logout" />
+      <img src={logoutIcon} alt="logout-icon" />
     </form>
-  )
-}
+  );
+};
 
-export default Logout
+export default Logout;
