@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./Menu";
 import Routes from "./Routes";
 
 const Home = ({ currentUser }) => {
@@ -25,8 +24,6 @@ const Home = ({ currentUser }) => {
 
   return (
     <div className="home">
-      {currentUser && <Menu />}
-
       <Routes board={board} currentUser={currentUser} />
     </div>
   );
