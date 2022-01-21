@@ -1,42 +1,28 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
-import Logout from './Logout'
-import Logo from './Logo'
-import { userLogout } from '../actions/userLogout'
+import React from "react";
+import Logout from "./Logout";
+import Logo from "./Logo";
+import Menu from "./Menu";
+import { userLogout } from "../actions/userLogout";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-class NavBar extends Component {
+const NavBar = ({ currentUser }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  handleLogout = event => {
-    event.preventDefault()
-    this.props.userLogout()
-  }
+  const handleLogout = (event) => {
+    event.preventDefault();
+    history.push("/");
+    dispatch(userLogout());
+  };
 
-  render() {
-    if (this.props.currentUser) {
-      return (
-        <div className='NavBar LoggedIn'>
-          <Logout handleLogout={this.handleLogout} />
-        </div>
-      )
-    } else {
-      return (
-        <div className='NavBar LoggedOut'>
-          <div className='auth-section'>
-            <Link to='/users/new' style={{marginLeft: '2rem'}}> Sign Up</Link>
-            <Link to='/login'>Log In</Link>
-          </div>
-        </div>
-      )
-    }
-  }
-}
+  return (
+    <nav className="nav-bar">
+      {currentUser && <Menu />}
+      <Logo currentUser={currentUser} />
+      {currentUser && <Logout handleLogout={handleLogout} />}
+    </nav>
+  );
+};
 
-const mapState = (state) => ({
-  currentUser: state.currentUser
-})
-
-export default connect(
-  mapState, 
-  {userLogout}
-)(NavBar)
+export default NavBar;
