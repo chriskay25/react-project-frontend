@@ -1,22 +1,23 @@
-import React from 'react'
-import SignupForm from './SignupForm'
-import LoginForm from './LoginForm'
-import { Route, Link, Switch, useLocation } from 'react-router-dom'
+import React from "react";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
+import { Route, Link, Switch, useLocation } from "react-router-dom";
 
 const AuthForms = () => {
-    const location = useLocation()
+  let location = useLocation();
 
-    return (
-        <div className='auth-forms'>
-            {location.pathname === '/' && <div className='form-links'>
-                <Link to='/users/new'> Sign Up</Link>
-                <Link to='/login'>Log In</Link>   
-            </div>}
-            
-            <Route exact path="/users/new" component={SignupForm} />
-            <Route exact path="/login" component={LoginForm} />
-        </div>
-    )
-}
+  return (
+    <div className="auth-forms">
+      <div className={location.pathname === "/auth" ? "form-links" : "hidden"}>
+        <Link to="/auth/signup">Sign Up</Link>
+        <Link to="/auth/login">Log In</Link>
+      </div>
+      <Switch>
+        <Route exact path="/auth/signup" component={SignupForm} />
+        <Route exact path="/auth/login" component={LoginForm} />
+      </Switch>
+    </div>
+  );
+};
 
-export default AuthForms
+export default AuthForms;
