@@ -17,7 +17,7 @@ const NavBar = ({ currentUser }) => {
   };
 
   return (
-    <nav className="nav-bar">
+    <nav className="nav-bar" style={{ height: currentUser ? "10vh" : "20vh" }}>
       {currentUser && <Menu />}
       <Logo currentUser={currentUser} />
       {currentUser && <Logout handleLogout={handleLogout} />}
