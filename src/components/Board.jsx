@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import boardBackground from "../assets/cheap_diagonal_fabric.png";
-import boardBackground from "../assets/blue-2.jpg";
 
 class Board extends Component {
   style = () => {
@@ -9,15 +7,15 @@ class Board extends Component {
       return {
         width: `${boardSize.width}px`,
         height: `${boardSize.height}px`,
-        border: "10px black solid",
-        backgroundImage: `radial-gradient(orange, lightblue)`,
+        border: "10px #ffd8a4 solid",
+        backgroundImage: "radial-gradient(#FAFFB3, #E68C67)",
       };
     } else if (gameOver) {
       return {
         width: `${boardSize.width}px`,
         height: `${boardSize.height}px`,
-        backgroundImage: "linear-gradient(45deg, crimson, black)",
-        backgroundSize: "300%",
+        backgroundImage: "radial-gradient(crimson, black)",
+        backgroundSize: "400%",
         animation: "game-over-animation 1s ease forwards",
       };
     } else {
@@ -25,8 +23,6 @@ class Board extends Component {
         width: `${boardSize.width}px`,
         height: `${boardSize.height}px`,
         border: "10px lightblue solid",
-        backgroundSize: "250%",
-        backgroundImage: `url(${boardBackground})`,
       };
     }
   };
@@ -37,11 +33,13 @@ class Board extends Component {
       <div className="board" style={this.style()}>
         {this.props.children}
         <p className="paused-text">{paused ? "Paused" : null}</p>
-        <p className="game-over-text">{gameOver ? "Game Over" : null}</p>
         {gameOver ? (
-          <button className="reset-button" onClick={startGame}>
-            New Game
-          </button>
+          <div className="game-over-container">
+            <p className="game-over-text">Game Over</p>
+            <button className="reset-button" onClick={startGame}>
+              New Game
+            </button>
+          </div>
         ) : null}
       </div>
     );
