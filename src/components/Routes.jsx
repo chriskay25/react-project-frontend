@@ -7,13 +7,13 @@ import HighScores from './HighScores'
 const Routes = ({ board, currentUser }) => {
     return (
         <Switch>
-            <Route exact path='/instructions'>
+            <Route exact path='/home/instructions'>
                 <Instructions />
             </Route>
-            <Route exact path='/game'>
+            <Route exact path='/home/game'>
                 <GameContainer boardSize={board} currentUser={currentUser} />
             </Route>
-            <Route exact path='/highscores'>
+            <Route exact path='/home/highscores'>
                 <HighScores currentUser={currentUser} />
             </Route>
         </Switch>
