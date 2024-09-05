@@ -1,8 +1,10 @@
-# React-Project-Frontend
+# React Project Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend of my final project for Flatiron School, though I've changed a lot since its first iteration. It's a simple game - control the player using arrow keys and try not to get hit by the incoming enemies.
 
-## Installation
+The backend is available at https://github.com/chriskay25/react-project-backend.git.
+
+### Installation
 Clone or fork the repository from https://github.com/chriskay25/react-project-frontend.
 
 Change directory in your terminal:
@@ -17,35 +19,28 @@ In the project directory, you can run:
 
     $ npm start
 
-Please note that you should already have the rails server running for the backend of this app, available at https://github.com/chriskay25/react-project-backend. <br />
+Please note that you should already have the rails server running for the backend of this app. <br />
 
-Open [http://localhost:3001](http://localhost:3001) to view it in the browser, if it doesn't automatically open a browser window for you.
+### Usage
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+When the app starts running, users can sign up for an account or log in so that their scores will be saved. Instructions for the game itself are displayed in the app.
 
-## Usage
-When the app starts running, users can sign up for an account so that their scores will be saved. Instructions for the game itself are displayed in the app.
+### Contributing
 
-## Contributing
+1. Fork the repository
+2. Create a new branch (git checkout -b feature-branch)
+3. Commit your changes (git commit -m 'Add some feature')
+4. Push to the branch (git push origin feature-branch)
+5. Create a new Pull Request
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/chriskay25/react-project-frontend. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/chriskay25/react-project-frontend. 
 
-## Authors
-Chris Kay - @chriskay25
-
-## License
+### License
 
 The web-app is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-## Code of Conduct
+### Contact
 
-Everyone interacting in the bucket_list project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/chriskay25/react-project-frontend/CODE_OF_CONDUCT.md).
+Chris Kay - chriskay25@gmail.com
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-
+Link to backend repo: https://github.com/chriskay25/react-project-backend.git
