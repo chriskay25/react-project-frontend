@@ -3,140 +3,411 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  height: 100%;
 }
 
-@media screen and (max-width: 699px) {
-  html {
-    font-size: 8px;
-  }
-  .auth-forms {
-    min-width: 100vw;
-  }
+body {
+  background-color: #282c34;
+  min-height: 100vh;
+  height: 100%;
 }
 
-@media screen and (min-width: 700px) {
-  html {
-    font-size: 10px;
-  }
-  .auth-forms {
-    max-width: 85vw;
-  }
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
 }
 
-@media screen and (min-width: 1000px) {
-  html {
-    font-size: 12px;
-  }
+ul {
+  list-style: none;
 }
 
-@media screen and (min-width: 1250px) {
-  html {
-    font-size: 14px;
-  }
+button {
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
 }
 
-@media screen and (min-width: 1600px) {
-  html {
-    font-size: 16px;
-  }
+a {
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  margin: 0.6rem;
+  /* font-size: 1.4rem; */
+  /* font-weight: bold; */
 }
 
-@keyframes game-over-animation {
-  0% {background-position: 0% 0%; border: lightblue solid 5px;}
-  100% {background-position: 100% 100%; border: black solid 5px;}
+a:link,
+a:visited {
+  background-color: transparent;
+  color: white;
 }
 
-@keyframes game-over-text {
-  0% {font-size: 2rem; color: maroon;}
-  100% {font-size: 5rem; color: lightblue;}
-}
-
-@keyframes user-info {
-  0% {color: black; font-size: 1rem; padding: 0 1rem;}
-  100% {color: white; font-size: 1.15rem; padding: 0 .9rem}
+#root {
+  height: 100%;
 }
 
 .App {
-  min-height: 100vh;
+  height: 100%;
   overflow: hidden;
+  scrollbar-width: none;
   background-color: #282c34;
+  margin: 0 auto;
+  position: relative;
+  font-family: Montserrat;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin: 0 auto;
+  width: 95%;
+  height: 10vh;
+  min-height: 50px;
+  position: relative;
+  overflow: visible;
 }
 
 .logo {
   display: flex;
-  width: 100%;
-}
-
-.logged-out-logo {
-  height: 20vh;
-  margin-top: 4vh;
-}
-
-.logged-in-logo {
-  height: 10vh;
-  margin-top: 2vh;
+  height: 100%;
+  transform: translateY(15px);
 }
 
 .logo img {
-  object-fit: contain;  /* maintains proportions of image */
+  object-fit: contain; /* maintains proportions of image */
   margin: 0 auto;
-  padding-right: 3rem;
+  z-index: 0;
+}
+
+.menu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  transition: 1.2s;
+  overflow: visible;
+}
+
+path {
+  transition: 1.2s;
+}
+
+.menu-links {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 95vh;
+  width: 105vw;
+  position: absolute;
+  left: -5vw;
+  top: 0;
+  /* background: rgba(0, 0, 0, 0.719); */
+  transition: 1.2s;
+}
+
+.menu-links.open {
+  transition: 1.2s ease 0.5s;
+}
+
+.menu-links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 35px;
+  color: lightblue;
+  background: #000;
+  height: 30%;
+  transition: 0.4s;
+}
+
+.menu-links a:hover {
+  background: lightblue;
+  color: #000;
+}
+
+.user-logout {
+  display: flex;
+  justify-content: right;
+  align-items: baseline;
+  height: 3rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.user-logout img {
+  height: 1.3rem;
+  width: 1.8rem;
+}
+
+.user-logout input {
+  background: transparent;
+  color: lightblue;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 800;
 }
 
 .auth-forms {
-  margin: 8rem auto;
-  max-width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 65vh;
+  max-width: 800px;
 }
 
-.form-links {
-  padding-bottom: 1.5rem;
+.form-links a {
+  margin: 0 2rem;
+  font-size: 45px;
+  position: relative;
+}
+.form-links a::after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  background: lightblue;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: 0.4s ease;
+}
+.form-links a:hover::after {
+  transform: scaleX(1);
 }
 
 .FormBox {
-  background-color: rgb(50, 65, 87);
-  max-width: 900px;
+  background-color: #324157;
+  border-radius: 3px;
+  max-width: 600px;
   color: white;
+  position: relative;
+  margin: 18vh auto;
+  padding: 3.5rem;
+}
+
+.form-switch {
+  position: absolute;
+  /* bottom: 5px; */
+  right: 18px;
+}
+
+.auth-submit {
+  margin: 1rem 0 0 1rem;
 }
 
 .InputForm {
-  padding-bottom: 2rem;
-  margin: 0rem 2rem;
-  max-width: 600px;
+  padding: 1rem;
+  width: 100%;
+  background-color: #425674;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.301);
+  font-size: 18px;
+}
+
+.form-inputs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-inputs label {
+  padding: 1rem;
+  font-weight: 600;
+  width: 30%;
+}
+
+.form-inputs input {
+  margin: 0.5rem 1rem;
+  font-size: 1.4rem;
+  width: 60%;
+  background: #c0d1db;
+}
+.form-inputs input:hover {
+  background: rgb(213, 219, 223);
+}
+.form-inputs input:focus {
+  background: #fff;
+}
+
+.InputForm input[type="submit"] {
+  font-weight: 800;
+  padding: 0.5rem 1.2rem;
+  margin-top: 1rem;
+  background: transparent;
+  border: solid lightblue 2px;
+  color: lightblue;
+}
+
+.InputForm input[type="submit"]:hover {
+  color: white;
+  border: solid white 2px;
+}
+
+.home {
+  height: calc(90vh - 25px);
+  margin-top: 25px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+}
+
+.options a {
+  padding: 0.5rem;
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  position: relative;
+}
+.options a::after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: lightblue;
+  transform: scaleX(0);
+  transition: 0.4s ease;
+}
+.options a:hover::after {
+  transform: scaleX(1);
 }
 
 .GameContainer {
-  max-height: 75vh;
-  min-width: 100vw;
-  color: #282c34;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .Instructions {
-  font-size: .8rem;
-  text-align: center;
   color: white;
   padding: 1rem;
+  height: 100%;
+  position: relative;
+}
+
+.instructions-container {
+  font-size: 22px;
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.instructions-container p {
+  margin: 2rem 0;
+  color: white;
+}
+
+.instructions-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+  margin: 1rem auto;
+  padding: 0;
+}
+
+.instructions-controls li {
+  display: flex;
+  justify-content: flex-start;
+  margin: 1.3rem 0;
+}
+
+.instructions-controls span {
+  width: 40%;
+}
+
+span.keyboard-key {
+  border: solid 2px white;
+  border-radius: 1rem;
+  padding: 0.2rem 0.6rem;
+  margin: 0 2.5rem;
+  color: white;
+  width: fit-content;
+}
+
+.board {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: rgb(0, 0, 126);
+  color: rgba(255, 255, 224, 0.502);
+  overflow: hidden;
+  background: linear-gradient(
+      45deg,
+      rgba(247, 155, 118, 0.6),
+      rgba(247, 155, 118, 0.4),
+      rgba(247, 155, 118, 0.2)
+    ),
+    linear-gradient(
+      rgba(0, 0, 0, 0.25) 0 5%,
+      transparent 5% 48%,
+      rgb(173, 216, 230) 48% 52%,
+      transparent 52% 100%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 2% 48%,
+      rgb(173, 216, 230) 48% 52%,
+      transparent 52% 98%
+    );
+  background-color: rgb(255, 255, 255);
+  background-size: 100% 100%, 4px 4px, 4px 4px;
+  transition: 0.3s;
 }
 
 .User {
   display: flex;
-  color: black;
+  color: lightblue;
   font-size: 1rem;
   justify-content: space-between;
   padding: 0 1rem;
 }
 
-.GameStats {
+.bombs {
   position: absolute;
-  right: 1rem;;
-  bottom: 0;
-  color: black;
-  font-size: 3.5rem;
-  max-height: 8rem;
+  left: 1rem;
+  bottom: 0.4rem;
+  color: #fff;
+  font-size: 2rem;
 }
 
-.PausedText {
+.score {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  color: #fff;
+  font-size: 3.5rem;
+  max-height: 8rem;
+  opacity: 75%;
+}
+
+.game-stats {
+  color: white;
+  background-color: blue;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.paused-text {
   position: absolute;
   width: 100%;
   margin: 0;
@@ -145,85 +416,176 @@ html {
   text-align: center;
   font-size: 6rem;
   opacity: 50%;
-  text-shadow: .3rem .3rem .5rem maroon;
+  text-shadow: 0.3rem 0.3rem 0.5rem #ffc578;
+}
+
+@keyframes game-over-animation {
+  0% {
+    background-position: 0% 0%;
+    border: lightblue solid 10px;
+  }
+  100% {
+    background-position: 100% 100%;
+    border: black solid 5px;
+  }
+}
+
+.game-over-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  top: 40%;
 }
 
 .game-over-text {
-  position: absolute;
-  width: 100%;
   margin: 0;
-  padding: 0;
-  top: 40%;
-  text-align: center;
+  width: fit-content;
   color: transparent;
   animation: game-over-text 1.5s ease forwards;
-  animation-delay: 1s;
+  animation-delay: 0.2s;
+}
+
+@keyframes game-over-text {
+  0% {
+    font-size: 2rem;
+    color: maroon;
+  }
+  100% {
+    font-size: 5rem;
+    color: lightblue;
+  }
 }
 
 .game-over-user-info {
   animation: user-info 1.5s ease forwards;
 }
 
-input {
-  background-color: rgb(216, 216, 216);
-  padding: .3rem;
-  margin: .5rem;
+@keyframes user-info {
+  0% {
+    color: rgb(241, 234, 234);
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  100% {
+    color: white;
+    font-size: 1.15rem;
+    padding: 0 0.9rem;
+  }
 }
 
-input[type=submit] {
+.game-over-score {
+  animation: game-over-score 1.5s ease forwards;
+}
+
+@keyframes game-over-score {
+  0% {
+    color: rgb(206, 225, 226);
+    font-size: 3.5rem;
+    bottom: 0;
+    opacity: 60%;
+  }
+  100% {
+    color: #fff;
+    font-size: 5.2rem;
+    bottom: 5px;
+    opacity: 100%;
+  }
+}
+
+.reset-button {
+  width: 38%;
+  max-width: 210px;
+  padding: 1rem 2rem;
+  margin-top: 15px;
+  font-size: 2rem;
+  background-color: black;
   color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: .5rem 1rem;
-  margin: 1rem 0 0 1rem;
-  background-color: transparent;
-  text-align: center;
-  border-radius: 6px;
-  border: .2rem solid lightblue;
 }
 
-input[type=submit]:hover {
-  background-color: white;
-  color: rgb(50, 65, 87);
-  border: .2rem solid white;
+.reset-button:hover {
+  background-color: lightblue;
+  color: black;
+}
+
+.new-highscore {
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 4rem;
+}
+
+.highscores-container {
+  max-width: 700px;
+  border-radius: 1rem;
+  background-image: radial-gradient(turquoise, rgb(110, 177, 185));
+  padding: 2rem 0;
+  margin: 12vh auto;
+}
+
+.highscores {
+  display: flex;
+  justify-content: space-between;
+}
+
+.highscores h2 {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.highscores-col {
+  width: 50%;
+  text-align: center;
+}
+
+.highscore {
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+input[type="submit"] {
   cursor: pointer;
 }
 
-input:focus {
-  border: .2rem solid black;
-  background-color: white;
+.hidden {
+  display: none;
 }
 
-input:hover {
-  background-color: white;
+@media screen and (max-width: 700px) {
+  html {
+    font-size: 8px;
+  }
+  .highscores-container {
+    width: 80%;
+  }
+  .form-links a {
+    font-size: 30px;
+  }
+  .menu-links a {
+    font-size: 22px;
+  }
+  .InputForm {
+    font-size: 14px;
+  }
+  .instructions-container {
+    font-size: 12px;
+  }
 }
 
-label {
-  padding: 1rem;
-  font-weight: bold;
+@media screen and (min-width: 700px) {
+  html {
+    font-size: 10px;
+  }
+  .highscores-container {
+    width: 80%;
+  }
 }
 
-a {
-  text-decoration: none;
-  padding: .5rem .8rem;
-  margin: 1rem;
-  font-size: 1.3rem;
-  font-weight: bold;
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 12px;
+  }
 }
-
-a:link, a:visited {
-  background-color: transparent;
-  border: .2rem solid lightblue;
-  border-radius: 6px;
-  color: white;
-}
-
-a:hover {
-  color: black;
-  background-color: lightblue;
-}
-
-
-
-
-

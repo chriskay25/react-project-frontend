@@ -1,44 +1,44 @@
-import React, { Component } from 'react';
-import './App.css';
-import UsersContainer from './containers/UsersContainer';
-import { connect } from 'react-redux';
-import Logout from './components/Logout'
-import AuthForms from './components/AuthForms'
-import Logo from './components/Logo'
-import { getCurrentUser } from './actions/getCurrentUser'
-import { userLogout } from './actions/userLogout'
-
+import React, { Component } from "react";
+import "./App.css";
+import { connect } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
+import AuthForms from "./components/AuthForms";
+import Home from "./components/Home";
+import { getCurrentUser } from "./actions/getCurrentUser";
+import NavBar from "./components/NavBar";
 
 class App extends Component {
-
-  handleLogout = event => {
-    event.preventDefault()
-    this.props.userLogout()
-  }
-
   render() {
-    const { currentUser } = this.props
+    const { currentUser } = this.props;
     return (
       <div className="App">
-          <Logo currentUser={currentUser} />
-          {currentUser ? null : <AuthForms />}
-          {currentUser ? <UsersContainer /> : null}
-          {currentUser ? <Logout handleLogout={this.handleLogout} /> : null}
+        <NavBar currentUser={currentUser} />
+        <Switch>
+          <Route exact path="/">
+            {currentUser ? <Redirect to="/home" /> : <Redirect to="/auth" />}
+          </Route>
+          <Route path="/auth">
+            {currentUser ? <Redirect to="/home" /> : <AuthForms />}
+          </Route>
+          <Route path="/home">
+            {currentUser ? (
+              <Home currentUser={currentUser} />
+            ) : (
+              <Redirect to="/auth" />
+            )}
+          </Route>
+        </Switch>
       </div>
-    )
+    );
   }
 
   componentDidMount() {
-    this.props.getCurrentUser()
+    this.props.getCurrentUser();
   }
 }
 
 const mapState = (state) => ({
-  currentUser: state.currentUser
-})
+  currentUser: state.currentUser,
+});
 
-
-export default connect(
-  mapState, 
-  { getCurrentUser, userLogout }
-)(App)
+export default connect(mapState, { getCurrentUser })(App);

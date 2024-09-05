@@ -1,24 +1,46 @@
-import React, { Component } from 'react';
-import Scores from './Scores'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getHighScores } from "../actions/getHighScores";
+import { getCurrentUser } from "../actions/getCurrentUser";
+import HighScore from "./HighScore";
 
-class HighScores extends Component {
+const HighScores = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser);
+  const games = useSelector((state) => state.highScores);
 
-  getHighScores = () => {
-    return ['100', '200', '300'].map(game => {
-      return (
-        <Scores score={game} />
-      )
-    })
-  }
+  useEffect(() => {
+    dispatch(getCurrentUser());
+    dispatch(getHighScores());
+  }, [dispatch]);
 
-  render() {
-   return (
-      <div className="HighScores">
-        {this.getHighScores()} 
+  const showHighScores = () => {
+    return games.map((game) => {
+      return <HighScore key={game.id} game={game} />;
+    });
+  };
+
+  const showUsersHighScores = () => {
+    return currentUser.highScores.map((game) => {
+      return <HighScore key={game.id} usersScore={game} />;
+    });
+  };
+
+  return (
+    <div className="highscores-container">
+      <h1 style={{ textAlign: "center", fontSize: "4rem" }}>HIGH SCORES</h1>
+      <div className="highscores">
+        <div className="highscores-col">
+          <h2>All Time</h2>
+          {showHighScores()}
+        </div>
+        <div className="highscores-col">
+          <h2>{currentUser.username}</h2>
+          {showUsersHighScores()}
+        </div>
       </div>
-    ) 
-  }
-  
-}
+    </div>
+  );
+};
 
-export default HighScores
+export default HighScores;
